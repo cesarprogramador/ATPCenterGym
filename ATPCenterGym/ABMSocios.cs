@@ -154,56 +154,63 @@ namespace ATPCenterGym
 
         private void dgvSocios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvSocios.Rows.Count > 0)
+            try
             {
-                this._socios.idpersona = this.dgvSocios[0, this.dgvSocios.CurrentCell.RowIndex].Value.ToString();
-
-                this._socio = this._socios.BuscarPersonaSocios(this._socios, "Socio");
-
-                if (this._socio.Tables["Socio"].Rows.Count > 0)
+                if (this.dgvSocios.Rows.Count > 0)
                 {
-                    this.txtApellido.Text = this._socio.Tables["Socio"].Rows[0][0].ToString();
-                    this.txtNombre.Text = this._socio.Tables["Socio"].Rows[0][1].ToString();
-                    this.txtFechaNac.Text = DateTime.Parse(this._socio.Tables["Socio"].Rows[0][2].ToString()).ToString("dd/MM/yyyy");
-                    this.txtDni.Text = this._socio.Tables["Socio"].Rows[0][3].ToString();
-                    this.txtCuil.Text = this._socio.Tables["Socio"].Rows[0][4].ToString();
-                    this.txtCel.Text = this._socio.Tables["Socio"].Rows[0][5].ToString();
-                    this.txtTel.Text = this._socio.Tables["Socio"].Rows[0][6].ToString();
-                    this.txtEmail.Text = this._socio.Tables["Socio"].Rows[0][7].ToString();
-                    this.txtCalle.Text = this._socio.Tables["Socio"].Rows[0][8].ToString();
-                    this.txtNumero.Text = this._socio.Tables["Socio"].Rows[0][9].ToString();
-                    this.txtPiso.Text = this._socio.Tables["Socio"].Rows[0][10].ToString();
-                    this.txtDpto.Text = this._socio.Tables["Socio"].Rows[0][11].ToString();
-                    //this.cbEspecialidad.Text = this._socio.Tables["Socio"].Rows[0][12].ToString();
-                    this.cbPuntos.Text = this._socio.Tables["Socio"].Rows[0][13].ToString();
-                    // this.pbxFoto.ImageLocation = this._socio.Tables["Socio"].Rows[0][2].ToString();
+                    this._socios.idpersona = this.dgvSocios[0, this.dgvSocios.CurrentCell.RowIndex].Value.ToString();
 
-                    this.dgvCursos.DataSource = this._cursos.BuscarInscripcionesCursosSocios("0", this.txtDni.Text, "Inscripciones");
-                    this.dgvCursos.DataMember = "Inscripciones";
+                    this._socio = this._socios.BuscarPersonaSocios(this._socios, "Socio");
 
-                    this.btnNuevoInsc.Enabled = true;
+                    if (this._socio.Tables["Socio"].Rows.Count > 0)
+                    {
+                        this.txtApellido.Text = this._socio.Tables["Socio"].Rows[0][0].ToString();
+                        this.txtNombre.Text = this._socio.Tables["Socio"].Rows[0][1].ToString();
+                        this.txtFechaNac.Text = DateTime.Parse(this._socio.Tables["Socio"].Rows[0][2].ToString()).ToString("dd/MM/yyyy");
+                        this.txtDni.Text = this._socio.Tables["Socio"].Rows[0][3].ToString();
+                        this.txtCuil.Text = this._socio.Tables["Socio"].Rows[0][4].ToString();
+                        this.txtCel.Text = this._socio.Tables["Socio"].Rows[0][5].ToString();
+                        this.txtTel.Text = this._socio.Tables["Socio"].Rows[0][6].ToString();
+                        this.txtEmail.Text = this._socio.Tables["Socio"].Rows[0][7].ToString();
+                        this.txtCalle.Text = this._socio.Tables["Socio"].Rows[0][8].ToString();
+                        this.txtNumero.Text = this._socio.Tables["Socio"].Rows[0][9].ToString();
+                        this.txtPiso.Text = this._socio.Tables["Socio"].Rows[0][10].ToString();
+                        this.txtDpto.Text = this._socio.Tables["Socio"].Rows[0][11].ToString();
+                        //this.cbEspecialidad.Text = this._socio.Tables["Socio"].Rows[0][12].ToString();
+                        this.cbPuntos.Text = this._socio.Tables["Socio"].Rows[0][13].ToString();
+                        // this.pbxFoto.ImageLocation = this._socio.Tables["Socio"].Rows[0][2].ToString();
 
-                    if (this.dgvCursos.Rows.Count > 0)
-                    {//Si presenta inscripciones a cursos
-                        this.dgvCursos.Columns[0].Visible = false;
-                        this.dgvCursos.Columns[5].Visible = false;
-                        this.dgvCursos.Columns[6].Visible = false;
-                        this.btnModificarInsc.Enabled = true;
-                        this.btnEliminarInsc.Enabled = true;
-                        this.gbxDetalleCursos.Enabled = true;
+                        this.dgvCursos.DataSource = this._cursos.BuscarInscripcionesCursosSocios("0", this.txtDni.Text, "Inscripciones");
+                        this.dgvCursos.DataMember = "Inscripciones";
+                        
+                        this.btnNuevoInsc.Enabled = true;
+
+                        if (this.dgvCursos.Rows.Count > 0)
+                        {//Si presenta inscripciones a cursos
+                            this.dgvCursos.Columns[0].Visible = false;
+                            this.dgvCursos.Columns[5].Visible = false;
+                            this.dgvCursos.Columns[6].Visible = false;
+                            this.btnModificarInsc.Enabled = true;
+                            this.btnEliminarInsc.Enabled = true;
+                            this.gbxDetalleCursos.Enabled = true;
+                        }
+                        else
+                        {//No presenta inscripciones a cursos
+                            this.btnModificarInsc.Enabled = false;
+                            this.btnEliminarInsc.Enabled = false;
+                            this.btnPagarCuota.Enabled = false;
+                        }
                     }
-                    else
-                    {//No presenta inscripciones a cursos
-                        this.btnModificarInsc.Enabled = false;
-                        this.btnEliminarInsc.Enabled = false;
-                        this.btnPagarCuota.Enabled = false;
-                    }
+
+                    this.gbxAcciones.Enabled = true;
+                    this.btnNuevo.Enabled = true;
+                    this.btnModificar.Enabled = true;
+                    this.btnEliminar.Enabled = true;
                 }
-
-                this.gbxAcciones.Enabled = true;
-                this.btnNuevo.Enabled = true;
-                this.btnModificar.Enabled = true;
-                this.btnEliminar.Enabled = true;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
             }
         }
 

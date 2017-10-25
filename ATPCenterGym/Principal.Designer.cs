@@ -191,6 +191,7 @@
             this.aBmGastosToolStripMenuItem.Name = "aBmGastosToolStripMenuItem";
             this.aBmGastosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.aBmGastosToolStripMenuItem.Text = "ABM Gastos";
+            this.aBmGastosToolStripMenuItem.Click += new System.EventHandler(this.aBmGastosToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 

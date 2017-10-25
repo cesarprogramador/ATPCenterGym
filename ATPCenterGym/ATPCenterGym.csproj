@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="cajadeldia\ClassCajaDelDia.cs" />
     <Compile Include="conexion\ClassConexion.cs" />
+    <Compile Include="gastos\ClassGastos.cs" />
     <Compile Include="inscripciones\ClassCursos.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>

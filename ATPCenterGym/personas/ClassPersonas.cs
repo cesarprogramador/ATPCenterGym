@@ -105,6 +105,13 @@ namespace ATPCenter.personas
             return this.RealizarAccion(sql,_tabla);
         }
 
+        public DataTable BuscarPersonaProveedores(ClassPersonas _proveedor)
+        {
+            sql = "CALL sp_buscadorproveedores(" + _proveedor.idpersona + ",'" + _proveedor.nombre + "','','','',0,100);";
+
+            return this.RealizarAccion(sql);
+        }
+
         public DataTable BuscarPersonaEmpleados(ClassPersonas _empleado)
         {
             sql = "CALL sp_buscadorempleados(" + _empleado.idpersona + ",'" + _empleado.apellido + "','" + _empleado.nombre + "','" + _empleado.dni + "','" + _empleado.punto + "','" + _empleado.tipopersona + "',0,100);";

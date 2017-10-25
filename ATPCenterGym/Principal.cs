@@ -335,5 +335,11 @@ namespace ATPCenterGym
             ABMProveedores formproveedor = new ABMProveedores();
             formproveedor.Show();
         }
+
+        private void aBmGastosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ABMGastos formgastos = new ABMGastos();
+            formgastos.Show();
+        }
     }
 }

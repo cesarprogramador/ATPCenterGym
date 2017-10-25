@@ -24,7 +24,7 @@ namespace ATPCenter.conexion
             
             _builder.Server = "localhost";
             _builder.UserID = "root";
-            _builder.Password = "123456a$";
+            _builder.Password = "root";
             _builder.Database = "dbatpgym";
         }
 

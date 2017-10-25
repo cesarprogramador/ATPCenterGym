@@ -279,12 +279,13 @@
             this.btnVerFactura.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnVerFactura.Location = new System.Drawing.Point(143, 163);
             this.btnVerFactura.Name = "btnVerFactura";
-            this.btnVerFactura.Size = new System.Drawing.Size(110, 41);
+            this.btnVerFactura.Size = new System.Drawing.Size(96, 41);
             this.btnVerFactura.TabIndex = 27;
             this.btnVerFactura.Text = "Ver factura";
             this.btnVerFactura.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVerFactura.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnVerFactura.UseVisualStyleBackColor = true;
+            this.btnVerFactura.Click += new System.EventHandler(this.btnVerFactura_Click);
             // 
             // btnAceptar
             // 
