@@ -62,5 +62,15 @@ namespace ATPCenterGym
         {
             Application.Exit();
         }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar== 13) this.btnIngresar_Click(sender,e);
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13) this.btnIngresar_Click(sender, e);
+        }
     }
 }

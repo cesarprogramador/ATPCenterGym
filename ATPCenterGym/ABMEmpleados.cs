@@ -74,6 +74,19 @@ namespace ATPCenterGym
         private void ABMEmpleados_Load(object sender, EventArgs e)
         {
             this._empleado = new ClassPersonas();
+
+            this._empleado.idpunto = "0";
+            this._empleado.nombrepunto = "";
+
+            DataTable _puntos = this._empleado.BuscarPuntos(this._empleado);
+
+            this.cbBusPuntos.DataSource = _puntos;
+            this.cbBusPuntos.ValueMember = "idpunto";
+            this.cbBusPuntos.DisplayMember = "nombrepunto";
+
+            this.cbPunto.DataSource = _puntos;
+            this.cbPunto.ValueMember = "idpunto";
+            this.cbPunto.DisplayMember = "nombrepunto";
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)

@@ -127,5 +127,134 @@ namespace ATPCenterGym
                 this.txtAlumnoPaga.Focus();
             }
         }
+
+        private void btnVerFactura_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvHistorialCuotas.Rows.Count > 0)
+                {
+                    this.ruta = Path.GetFullPath("comprobante.html");
+
+                    this.arch = new StreamWriter(this.ruta);
+
+                    this.arch.WriteLine("<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>");
+                    this.arch.WriteLine("<html>");
+                    this.arch.WriteLine("<head>");
+                    this.arch.WriteLine("<title>Comprobante Pago de Cuota</title>");
+                    this.arch.WriteLine("<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>");
+                    this.arch.WriteLine("<style type='text/css'>");
+                    this.arch.WriteLine("<!--");
+                    this.arch.WriteLine(".Estilo7 {");
+                    this.arch.WriteLine("font-size: 10px;");
+                    this.arch.WriteLine("font-weight: bold;");
+                    this.arch.WriteLine("}");
+                    this.arch.WriteLine(".Estilo8 {font-size: 10px}");
+                    this.arch.WriteLine(".Estilo10 {font-size: 12px}");
+                    this.arch.WriteLine(".Estilo11 {font-size: 12px; font-weight: bold; }");
+                    this.arch.WriteLine(".Estilo12 {font-size: 14px}");
+                    this.arch.WriteLine("-->");
+                    this.arch.WriteLine("</style>");
+                    this.arch.WriteLine("</head>");
+
+                    this.arch.WriteLine("<body>");
+                    this.arch.WriteLine("<table width='658' border='0' cellpadding='0' cellspacing='0'>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th width='25' scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<th colspan='2' scope='col'><div align='right' class='Estilo10'>");
+                    this.arch.WriteLine("<div align='center' class='Estilo12'></div>");
+                    this.arch.WriteLine("</div></th>");
+                    this.arch.WriteLine("<th width='194' scope='col'><div align='left' class='Estilo10'>Fecha: " + DateTime.Now.ToString("dd/MM/yyyy") + "</div></th>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th colspan='4' scope='col'><span class='Estilo10'><span class='Estilo12'>Pago de cuota</span></span><span class='Estilo10'></span></th>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th colspan='4' scope='col'><div align='center'><span class='Estilo10'>ATP Center</span></div>      </th>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th width='25' scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<th width='94' scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<th width='347' scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<td>&nbsp;</td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td colspan='4'>&nbsp;</td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td colspan='4'><table width='660' border='1' cellpadding='0' cellspacing='0'>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td width='87'><div align='right' class='Estilo10'><strong>Se&ntilde;or(es):</strong></div></td>");
+                    this.arch.WriteLine("        <td width='568'><span class='Estilo10'>" + this.txtApellido.Text + ", " + this.txtNombre.Text + "</span></td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td><div align='right' class='Estilo10'><strong>Nombre de clase:</strong></div></td>");
+                    this.arch.WriteLine("<td><span class='Estilo10'>" + this.txtNombreClase.Text + "</span></td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td><div align='right' class='Estilo10'><strong>Valor cuota:</strong></div></td>");
+                    this.arch.WriteLine("<td><span class='Estilo10'>" + this.txtMontoCuota.Text + "</span></td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td><div align='right' class='Estilo10'><strong>Punto Gym:</strong></div></td>");
+                    this.arch.WriteLine("<td><span class='Estilo10'>" + this.txtPunto.Text + "</span></td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("</table></td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td colspan='4'>&nbsp;</td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td colspan='4'>");
+                    this.arch.WriteLine("<table width='660' border='1' cellpadding='0' cellspacing='0'>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th width='48' scope='col'><span class='Estilo8'>CANT.</span></th>");
+                    this.arch.WriteLine("<th width='391' scope='col'><span class='Estilo8'>DETALLE</span></th>");
+                    this.arch.WriteLine("<th width='109' scope='col'><span class='Estilo8'>P. UNITARIO </span></th>");
+                    this.arch.WriteLine("<th width='84' scope='col'><span class='Estilo8'>IMPORTE</span></th>");
+                    this.arch.WriteLine("</tr>");
+
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine(" <td><div align='center' class='Estilo10'>1</div></td>");
+                    this.arch.WriteLine(" <td><div align='center' class='Estilo10'>Se realizo el pago de la " + this.txtNumCuota.Text.Replace("º", "&deg;") + "</div></td>");
+                    this.arch.WriteLine("  <td><div align='center' class='Estilo10'>" + this.txtAlumnoPaga.Text + "</div></td>");
+                    this.arch.WriteLine("  <td><div align='center' class='Estilo10'>" + this.txtAlumnoPaga.Text + "</div></td>");
+                    this.arch.WriteLine(" </tr>");
+
+                    this.arch.WriteLine("</table>");
+                    this.arch.WriteLine("	</td>");
+                    this.arch.WriteLine("  </tr>");
+                    this.arch.WriteLine(" <tr>");
+                    this.arch.WriteLine("   <td colspan='4'>&nbsp;</td>");
+                    this.arch.WriteLine(" </tr>");
+                    this.arch.WriteLine(" <tr>");
+                    this.arch.WriteLine("   <td colspan='4'>");
+                    this.arch.WriteLine("	<table width='660' border='1' cellpadding='0' cellspacing='0'>");
+                    this.arch.WriteLine(" <tr>");
+                    this.arch.WriteLine("   <td colspan='2' rowspan='2'><div align='center' class='Estilo11'>Documento no valido como factura</div></td>");
+                    this.arch.WriteLine("   <td><div align='right' class='Estilo7'>Subtotal $: </div></td>");
+                    this.arch.WriteLine("   <td><div align='center' class='Estilo8'>" + this.txtAlumnoPaga.Text + "</div></td>");
+                    this.arch.WriteLine(" </tr>");
+                    this.arch.WriteLine(" <tr>");
+                    this.arch.WriteLine("   <td><div align='right' class='Estilo8'><strong>Total $: </strong></div></td>");
+                    this.arch.WriteLine("   <td><div align='center' class='Estilo8'>" + this.txtAlumnoPaga.Text + "</div></td>");
+                    this.arch.WriteLine("  </tr>");
+                    this.arch.WriteLine("</table>");
+                    this.arch.WriteLine("</td>");
+                    this.arch.WriteLine(" </tr>");
+                    this.arch.WriteLine("</table>");
+                    this.arch.WriteLine("</body>");
+                    this.arch.WriteLine("</html>");
+
+                    this.arch.Close();
+
+                    System.Diagnostics.Process.Start(this.ruta);
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+        }
     }
 }
