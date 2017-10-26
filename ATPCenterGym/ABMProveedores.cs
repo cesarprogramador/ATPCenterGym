@@ -67,6 +67,7 @@ namespace ATPCenterGym
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             this._proveedores.nombre = this.txtNombre.Text;
+            this._proveedores.fechanac = DateTime.Now.ToString("yyyy/MM/dd");
             this._proveedores.cuit = this.txtCuit.Text;
             this._proveedores.cel = this.txtCel.Text;
             this._proveedores.tel = this.txtTel.Text;

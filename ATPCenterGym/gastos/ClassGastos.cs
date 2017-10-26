@@ -32,9 +32,8 @@ namespace ATPCenterGym.gastos
         public string sql { get; set; }
 
         public DataSet BuscarGastos(ClassGastos _gasto, string _tabla)
-        {
-            
-            sql = "CALL sp_buscadorgastos(" + _gasto.idgasto + ",'" + _gasto.fechafingasto + "','" + _gasto.fechafingasto + "','" + _gasto.nombreproveedor + "','" + _gasto.nombrepunto + "',0,100);";
+        {  
+            sql = "CALL sp_buscadorgastos(" + _gasto.idgasto + ",'" + _gasto.fechainigasto + "','" + _gasto.fechafingasto + "','" + _gasto.nombreproveedor + "','" + _gasto.nombrepunto + "',0,100);";
 
             return this.RealizarAccion(sql, _tabla);
         }
@@ -52,7 +51,7 @@ namespace ATPCenterGym.gastos
 
         public DataSet ABMGasto(ClassGastos _gasto, string _tabla)
         {
-            sql = "CALL sp_abmgasto(" + _gasto.idgasto + ",'" + _empleado.apellido + "','" + _empleado.nombre + "','" + _empleado.fechanac + "','" + _empleado.dni + "','" + _empleado.cuil + "','" + _empleado.cel + "','" + _empleado.tel + "','" + _empleado.correo + "','" + _empleado.calle + "','" + _empleado.numero + "','" + _empleado.piso + "','" + _empleado.dpto + "','" + _empleado.punto + "','" + _empleado.tipopersona + "','" + _empleado.urlfoto + "','" + _empleado.apellidocotacto + "','" + _empleado.nombrecontacto + "','" + _empleado.celcontacto + "','" + _empleado.telcontacto + "','" + _empleado.emailcontacto + "','" + _empleado.cuit + "','" + _empleado.accion + "','" + _empleado.fechaaccion + "','" + _empleado.idempleadoaccion + "','" + _empleado.idpuntoaccion + "');";
+            sql = "CALL sp_abmgasto(" + _gasto.idgasto + ",'" + _gasto.fecharealcarga + "','" + _gasto.fechagasto + "','" + _gasto.tipofactura + "','" + _gasto.numerofactura + "','" + _gasto.idproveedor + "','" + _gasto.idpunto + "','" + _gasto.montopagado + "','" + _gasto.observacion + "','" + _gasto.accion + "','" + _gasto.fechaaccion + "','" + _gasto.idempleadoaccion + "','" + _gasto.idpuntoaccion + "');";
 
             return this.RealizarAccion(sql, _tabla);
         }

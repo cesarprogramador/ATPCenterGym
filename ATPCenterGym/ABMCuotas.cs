@@ -61,7 +61,7 @@ namespace ATPCenterGym
             this._inscrialu.idcuota = this.dgvHistorialCuotas[0, this.dgvHistorialCuotas.CurrentCell.RowIndex].Value.ToString();
             this._inscrialu.numcuota = int.Parse(this.dgvHistorialCuotas[1, this.dgvHistorialCuotas.CurrentCell.RowIndex].Value.ToString()) + 1;
             this._inscrialu.idcurso = this._idcurso;
-            this._inscrialu.fecharealpago = DateTime.Now.ToString();
+            this._inscrialu.fecharealpago = DateTime.Now.ToString("yyyy/MM/dd");
             this._inscrialu.fechaproximopago = DateTime.Parse(this.txtFechaPago.Text).AddMonths(1).ToString("yyyy/MM/dd");
             this._inscrialu.montocuota = Decimal.Parse(this.txtMontoCuota.Text);
             this._inscrialu.montopagado = Decimal.Parse(this.txtAlumnoPaga.Text);

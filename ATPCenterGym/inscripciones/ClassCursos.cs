@@ -99,7 +99,7 @@ namespace ATPCenter.tiposdeclase
 
         public DataSet ABMCuotasSocios(ClassCursos _cuota, string _tabla)
         {
-            sql = "CALL sp_abmcuotasocio(" + _cuota.idcuota + "," + _cuota.idcurso + ",'" + _cuota.fechaproximopago + "','" + _cuota.montocuota + "'," + _cuota.montopagado + ",'" + _cuota.montosaldo + "'," + _cuota.numcuota + ",'" + _cuota.accion + "','" + _cuota.fechaaccion + "','" + _cuota.idempleadoaccion + "','" + _cuota.idpuntoaccion + "');";
+            sql = "CALL sp_abmcuotasocio(" + _cuota.idcuota + "," + _cuota.idcurso + ",'" + _cuota.fecharealpago + "','" + _cuota.fechaproximopago + "','" + _cuota.montocuota + "'," + _cuota.montopagado + ",'" + _cuota.montosaldo + "'," + _cuota.numcuota + ",'" + _cuota.accion + "','" + _cuota.fechaaccion + "','" + _cuota.idempleadoaccion + "','" + _cuota.idpuntoaccion + "');";
 
             return this.RealizarAccion(sql, _tabla);
         }

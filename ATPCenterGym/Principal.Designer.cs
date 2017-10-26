@@ -48,7 +48,6 @@
             this.btnBusTipoClase = new System.Windows.Forms.Button();
             this.btnVistaPrevia = new System.Windows.Forms.Button();
             this.btnCajaDia = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtBusDetalleMovimiento = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -71,6 +70,12 @@
             this.txtBusFechaIni = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTituloForm = new System.Windows.Forms.Label();
+            this.txtTotalIngreso = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtTotalEgreso = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtTotalCaja = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleCaja)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -85,7 +90,7 @@
             this.dgvDetalleCaja.Location = new System.Drawing.Point(12, 232);
             this.dgvDetalleCaja.Name = "dgvDetalleCaja";
             this.dgvDetalleCaja.ReadOnly = true;
-            this.dgvDetalleCaja.Size = new System.Drawing.Size(926, 455);
+            this.dgvDetalleCaja.Size = new System.Drawing.Size(926, 379);
             this.dgvDetalleCaja.TabIndex = 0;
             // 
             // menuStrip1
@@ -97,7 +102,7 @@
             this.aBMToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(6, 8);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(205, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(113, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -227,10 +232,10 @@
             // 
             // btnVistaPrevia
             // 
-            this.btnVistaPrevia.BackgroundImage = global::ATPCenterGym.Properties.Resources.Refresh;
+            this.btnVistaPrevia.BackgroundImage = global::ATPCenterGym.Properties.Resources.Info;
             this.btnVistaPrevia.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnVistaPrevia.ForeColor = System.Drawing.Color.Black;
-            this.btnVistaPrevia.Location = new System.Drawing.Point(693, 184);
+            this.btnVistaPrevia.Location = new System.Drawing.Point(593, 184);
             this.btnVistaPrevia.Name = "btnVistaPrevia";
             this.btnVistaPrevia.Size = new System.Drawing.Size(105, 42);
             this.btnVistaPrevia.TabIndex = 53;
@@ -244,7 +249,7 @@
             this.btnCajaDia.BackgroundImage = global::ATPCenterGym.Properties.Resources.Refresh;
             this.btnCajaDia.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCajaDia.ForeColor = System.Drawing.Color.Black;
-            this.btnCajaDia.Location = new System.Drawing.Point(565, 183);
+            this.btnCajaDia.Location = new System.Drawing.Point(445, 183);
             this.btnCajaDia.Name = "btnCajaDia";
             this.btnCajaDia.Size = new System.Drawing.Size(105, 42);
             this.btnCajaDia.TabIndex = 52;
@@ -252,21 +257,7 @@
             this.btnCajaDia.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCajaDia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCajaDia.UseVisualStyleBackColor = true;
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.BackgroundImage = global::ATPCenterGym.Properties.Resources.Refresh;
-            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
-            this.btnLimpiar.Location = new System.Drawing.Point(438, 184);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(86, 42);
-            this.btnLimpiar.TabIndex = 51;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            this.btnCajaDia.Click += new System.EventHandler(this.btnCajaDia_Click);
             // 
             // btnBuscar
             // 
@@ -340,7 +331,8 @@
             this.cbBusTipoOperaciones.Items.AddRange(new object[] {
             "Caja del día",
             "Ingresos",
-            "Egresos"});
+            "Egresos",
+            "Cuotas Impagas"});
             this.cbBusTipoOperaciones.Location = new System.Drawing.Point(118, 64);
             this.cbBusTipoOperaciones.Name = "cbBusTipoOperaciones";
             this.cbBusTipoOperaciones.Size = new System.Drawing.Size(131, 21);
@@ -480,18 +472,81 @@
             this.lblTituloForm.TabIndex = 57;
             this.lblTituloForm.Text = "Ventana Principal";
             // 
+            // txtTotalIngreso
+            // 
+            this.txtTotalIngreso.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalIngreso.Location = new System.Drawing.Point(803, 622);
+            this.txtTotalIngreso.Name = "txtTotalIngreso";
+            this.txtTotalIngreso.Size = new System.Drawing.Size(131, 22);
+            this.txtTotalIngreso.TabIndex = 59;
+            this.txtTotalIngreso.Text = "0.00";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.White;
+            this.label11.Location = new System.Drawing.Point(719, 626);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(81, 13);
+            this.label11.TabIndex = 58;
+            this.label11.Text = "Total Ingreso $:";
+            // 
+            // txtTotalEgreso
+            // 
+            this.txtTotalEgreso.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalEgreso.Location = new System.Drawing.Point(803, 648);
+            this.txtTotalEgreso.Name = "txtTotalEgreso";
+            this.txtTotalEgreso.Size = new System.Drawing.Size(131, 22);
+            this.txtTotalEgreso.TabIndex = 61;
+            this.txtTotalEgreso.Text = "0.00";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(721, 652);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(79, 13);
+            this.label12.TabIndex = 60;
+            this.label12.Text = "Total Egreso $:";
+            // 
+            // txtTotalCaja
+            // 
+            this.txtTotalCaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalCaja.ForeColor = System.Drawing.Color.Red;
+            this.txtTotalCaja.Location = new System.Drawing.Point(803, 681);
+            this.txtTotalCaja.Name = "txtTotalCaja";
+            this.txtTotalCaja.Size = new System.Drawing.Size(131, 22);
+            this.txtTotalCaja.TabIndex = 63;
+            this.txtTotalCaja.Text = "0.00";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(686, 685);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(115, 13);
+            this.label13.TabIndex = 62;
+            this.label13.Text = "Monto Total en Caja $:";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(946, 699);
+            this.ClientSize = new System.Drawing.Size(946, 713);
+            this.Controls.Add(this.txtTotalCaja);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtTotalEgreso);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtTotalIngreso);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.lblTituloForm);
             this.Controls.Add(this.btnBusNombreClase);
             this.Controls.Add(this.btnBusTipoClase);
             this.Controls.Add(this.btnVistaPrevia);
             this.Controls.Add(this.btnCajaDia);
-            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtBusDetalleMovimiento);
             this.Controls.Add(this.label10);
@@ -550,7 +605,6 @@
         private System.Windows.Forms.Button btnBusTipoClase;
         private System.Windows.Forms.Button btnVistaPrevia;
         private System.Windows.Forms.Button btnCajaDia;
-        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtBusDetalleMovimiento;
         private System.Windows.Forms.Label label10;
@@ -573,5 +627,11 @@
         private System.Windows.Forms.TextBox txtBusFechaIni;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTituloForm;
+        private System.Windows.Forms.TextBox txtTotalIngreso;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtTotalEgreso;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtTotalCaja;
+        private System.Windows.Forms.Label label13;
     }
 }

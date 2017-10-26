@@ -416,11 +416,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 63);
+            this.label10.Location = new System.Drawing.Point(20, 63);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.Size = new System.Drawing.Size(84, 13);
             this.label10.TabIndex = 4;
-            this.label10.Text = "Fecha real pago:";
+            this.label10.Text = "Fecha del pago:";
             // 
             // txtFechaPago
             // 
@@ -432,11 +432,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(37, 35);
+            this.label9.Location = new System.Drawing.Point(20, 34);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(67, 13);
+            this.label9.Size = new System.Drawing.Size(85, 13);
             this.label9.TabIndex = 2;
-            this.label9.Text = "Fecha pago:";
+            this.label9.Text = "Fecha de carga:";
             // 
             // ABMCuotas
             // 

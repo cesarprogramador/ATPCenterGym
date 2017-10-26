@@ -26,6 +26,8 @@ namespace ATPCenterGym
 
         private void ABMGastos_Load(object sender, EventArgs e)
         {
+            this._gastos = new ClassGastos();
+            
             this.txtBusFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
             this.txtBusFechaFin.Text = this.txtBusFechaIni.Text;
 
@@ -65,16 +67,14 @@ namespace ATPCenterGym
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            this.txtBusFechaIni.Text = "";
-            this.txtBusFechaFin.Text = "";
+            this.txtBusFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            this.txtBusFechaFin.Text = this.txtBusFechaIni.Text;
             this.cbBusProveedor.Text = "";
             this.cbBusPuntos.Text = "";
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            this._gastos = new ClassGastos();
-
             this._gastos.idgasto = "0";
             this._gastos.fechainigasto = DateTime.Parse(this.txtBusFechaIni.Text).ToString("yyyy/MM/dd");
             this._gastos.fechafingasto = DateTime.Parse(this.txtBusFechaFin.Text).ToString("yyyy/MM/dd"); 
@@ -95,18 +95,20 @@ namespace ATPCenterGym
                 {
                     this._gastos.idgasto = this.dgvGastos[0, this.dgvGastos.CurrentCell.RowIndex].Value.ToString();
 
+                    this._Gastos = new DataSet();
+                    
                     this._Gastos = this._gastos.BuscarGastos(this._gastos, "Gasto");
 
                     if (this._Gastos.Tables["Gasto"].Rows.Count > 0)
                     {
-                        this.txtFechaCarga.Text = this._Gastos.Tables["Gasto"].Rows[0][0].ToString();
-                        this.txtFechaFactura.Text = this._Gastos.Tables["Gasto"].Rows[0][1].ToString();
-                        this.cbFactura.Text = this._Gastos.Tables["Gasto"].Rows[0][2].ToString();
-                        this.txtNumFactura.Text = this._Gastos.Tables["Gasto"].Rows[0][3].ToString();
-                        this.cbProveedor.Text = this._Gastos.Tables["Gasto"].Rows[0][4].ToString();
-                        this.cbPuntos.Text = this._Gastos.Tables["Gasto"].Rows[0][5].ToString();
-                        this.txtMontoPagado.Text = this._Gastos.Tables["Gasto"].Rows[0][6].ToString();
-                        this.txtObservacion.Text = this._Gastos.Tables["Gasto"].Rows[0][7].ToString();
+                        this.txtFechaCarga.Text = this._Gastos.Tables["Gasto"].Rows[0][1].ToString();
+                        this.txtFechaFactura.Text = this._Gastos.Tables["Gasto"].Rows[0][2].ToString();
+                        this.cbFactura.Text = this._Gastos.Tables["Gasto"].Rows[0][3].ToString();
+                        this.txtNumFactura.Text = this._Gastos.Tables["Gasto"].Rows[0][4].ToString();
+                        this.cbProveedor.Text = this._Gastos.Tables["Gasto"].Rows[0][5].ToString();
+                        this.cbPuntos.Text = this._Gastos.Tables["Gasto"].Rows[0][6].ToString();
+                        this.txtMontoPagado.Text = this._Gastos.Tables["Gasto"].Rows[0][7].ToString();
+                        this.txtObservacion.Text = this._Gastos.Tables["Gasto"].Rows[0][8].ToString();
                     }
 
                     this.gbxAcciones.Enabled = true;
@@ -168,8 +170,8 @@ namespace ATPCenterGym
             this._gastos.fechagasto = DateTime.Parse(this.txtFechaFactura.Text).ToString("yyyy/MM/dd");
             this._gastos.tipofactura = this.cbFactura.Text;
             this._gastos.numerofactura = this.txtNumFactura.Text;
-            this._gastos.nombreproveedor = this.cbProveedor.Text;
-            this._gastos.nombrepunto = this.cbPuntos.Text;
+            this._gastos.idproveedor = this.cbProveedor.SelectedValue.ToString();
+            this._gastos.idpunto = this.cbPuntos.SelectedValue.ToString();
             this._gastos.montopagado = Decimal.Parse(this.txtMontoPagado.Text);
             this._gastos.observacion = this.txtObservacion.Text;
                         

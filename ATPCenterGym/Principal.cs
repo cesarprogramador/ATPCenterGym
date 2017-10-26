@@ -117,7 +117,7 @@ namespace ATPCenterGym
             }
         }
 
-        private void btnLimpiar_Click(object sender, EventArgs e)
+        private void Limpiar()
         {
             this.cbBusTipoPersona.Text = "Todos";
             this.txtBusFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -143,18 +143,7 @@ namespace ATPCenterGym
 
         private void cerrarSessionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this._loginper = new ClassPersonas();
-
-            Login formlogin = new Login();
-
-            formlogin.ShowDialog();
-
-            this._loginper.idpersona = formlogin.idpersona;
-            this._loginper.apellido = formlogin.apellido;
-            this._loginper.nombre = formlogin.nombre;
-            this._loginper.tipopersona = formlogin.tipopersona;
-            this._loginper.idpunto = "0";
-            this._loginper.punto = formlogin.punto;
+            this.Principal_Load(sender, e);
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -214,6 +203,15 @@ namespace ATPCenterGym
                     this._caja.tipoclase = "";
                     this._caja.nombreclase = "";
                     break;
+                case "Cuotas Impagas":
+                    this._caja.tipopersona = "";
+                    this._caja.apellidos = this.txtBusApellido.Text;
+                    this._caja.nombres = this.txtBusNombre.Text;
+                    this._caja.detallemovimiento = "";
+                    this._caja.punto = this.cbBusPuntos.Text;
+                    this._caja.nombreclase = this.cbBusNombreClase.Text;
+                    this._caja.tipoclase = this.cbBusTipoClase.Text;
+                    break;
             }
 
             this.dgvDetalleCaja.DataSource = this._caja.BuscarCajaDelDia(this._caja, "CajaDia");
@@ -224,7 +222,34 @@ namespace ATPCenterGym
                 this.dgvDetalleCaja.Columns[0].Visible = false;
                 this.dgvDetalleCaja.Columns[8].Visible = false;
                 this.dgvDetalleCaja.Columns[9].Visible = false;
+
+                this.ObtenerTotales();
             }
+        }
+
+        private void ObtenerTotales()
+        {
+            decimal totalingreso = 0;
+            decimal totalegreso = 0;
+            decimal totalcaja = 0;
+
+            for (int fil = 0; fil < this.dgvDetalleCaja.Rows.Count; fil++)
+            {
+                if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas")
+                {
+                    totalegreso = totalegreso + decimal.Parse(this.dgvDetalleCaja[5, fil].Value.ToString());
+                }
+                else
+                {
+                    totalingreso = totalingreso + decimal.Parse(this.dgvDetalleCaja[6, fil].Value.ToString());
+                    totalegreso = totalegreso + decimal.Parse(this.dgvDetalleCaja[7, fil].Value.ToString());
+                }
+            }
+
+            this.txtTotalIngreso.Text = totalingreso.ToString();
+            this.txtTotalEgreso.Text = totalegreso.ToString();
+            totalcaja = totalingreso - totalegreso;
+            this.txtTotalCaja.Text = totalcaja.ToString();
         }
 
         private void cbBusTipoOperaciones_SelectedValueChanged(object sender, EventArgs e)
@@ -340,6 +365,12 @@ namespace ATPCenterGym
         {
             ABMGastos formgastos = new ABMGastos();
             formgastos.Show();
+        }
+
+        private void btnCajaDia_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
+            this.btnBuscar_Click(sender, e);
         }
     }
 }
