@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace ATPCenterGym
         ClassPersonas _loginper;
         ClassCursos _cursos;
         ClassCajaDelDia _caja;
+        StreamWriter arch;
+        string ruta = "";
 
         public Principal()
         {
@@ -219,10 +222,17 @@ namespace ATPCenterGym
 
             if (this.dgvDetalleCaja.Rows.Count > 0)
             {
-                this.dgvDetalleCaja.Columns[0].Visible = false;
-                this.dgvDetalleCaja.Columns[8].Visible = false;
-                this.dgvDetalleCaja.Columns[9].Visible = false;
-
+                if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas") 
+                {
+                    this.dgvDetalleCaja.Columns[0].Visible = false;
+                    this.dgvDetalleCaja.Columns[9].Visible = false;
+                }
+                else
+                {
+                    this.dgvDetalleCaja.Columns[0].Visible = false;
+                    this.dgvDetalleCaja.Columns[8].Visible = false;
+                    this.dgvDetalleCaja.Columns[9].Visible = false;
+                }
                 this.ObtenerTotales();
             }
         }
@@ -237,7 +247,7 @@ namespace ATPCenterGym
             {
                 if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas")
                 {
-                    totalegreso = totalegreso + decimal.Parse(this.dgvDetalleCaja[5, fil].Value.ToString());
+                    totalegreso = totalegreso + decimal.Parse(this.dgvDetalleCaja[8, fil].Value.ToString());
                 }
                 else
                 {
@@ -371,6 +381,157 @@ namespace ATPCenterGym
         {
             this.Limpiar();
             this.btnBuscar_Click(sender, e);
+        }
+
+        private void btnVistaPrevia_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgvDetalleCaja.Rows.Count > 0)
+                {
+                    this.ruta = Path.GetFullPath("informe.html");
+
+                    this.arch = new StreamWriter(this.ruta);
+
+                    this.arch.WriteLine("<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'");
+                    this.arch.WriteLine("'http://www.w3.org/TR/html4/loose.dtd'>");
+                    this.arch.WriteLine("<html>");
+                    this.arch.WriteLine("<head>");
+                    this.arch.WriteLine("<title>Presupuesto</title>");
+                    this.arch.WriteLine("<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>");
+                    this.arch.WriteLine("<style type='text/css'>");
+                    this.arch.WriteLine("<!--");
+                    this.arch.WriteLine(".Estilo7 {");
+                    this.arch.WriteLine("font-size: 10px;");
+                    this.arch.WriteLine("font-weight: bold;");
+                    this.arch.WriteLine("}");
+                    this.arch.WriteLine(".Estilo8 {font-size: 14px; color:#FFF;}");
+                    this.arch.WriteLine(".Estilo10 {font-size: 13px}");
+                    this.arch.WriteLine(".Estilo11 {font-size: 12px; font-weight: bold; }");
+                    this.arch.WriteLine(".Estilo12 {font-size: 14px}");
+                    this.arch.WriteLine("-->");
+                    this.arch.WriteLine("</style>");
+                    this.arch.WriteLine("</head>");
+                    this.arch.WriteLine("<body>");
+                    this.arch.WriteLine("<table width='100%' border='0' cellpadding='0' cellspacing='0'>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<th colspan='2' scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<th width='194' scope='col'><div align='left' class='Estilo10'>Fecha: " + DateTime.Now.ToString("dd/MM/yyyy") + "</div></th>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th colspan='4' scope='col'><span class='Estilo12'>Informe de Caja</span></th>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th colspan='4' scope='col'><span class='Estilo12'>" + (this.cbBusTipoOperaciones.Text == "Caja del día" ? "Caja del d&iacute;a" : this.cbBusTipoOperaciones.Text) + "</span></th>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<th width='25' scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<th width='94' scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<th width='347' scope='col'>&nbsp;</th>");
+                    this.arch.WriteLine("<td>&nbsp;</td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+                    this.arch.WriteLine("<td colspan='4'>");
+                    this.arch.WriteLine("<table width='100%' border='0' cellpadding='0' cellspacing='0'>");
+
+                    this.arch.WriteLine("<tr class='Estilo10'>");
+                    this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>FECHA</span></th>");
+                    this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>PUNTO</span></th>");
+                    this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>DETALLE</span></th>");
+
+                    if (this.cbBusTipoOperaciones.Text == "Caja del día") this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>PERSONA </span></th>");
+                    if (this.cbBusTipoOperaciones.Text == "Ingresos" || this.cbBusTipoOperaciones.Text == "Cuotas Impagas") this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>SOCIO </span></th>");
+                    if (this.cbBusTipoOperaciones.Text == "Egresos") this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>PROVEEDOR </span></th>");
+
+                    if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas")
+                    {
+                        this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>CLASE/TIPO <span></th>");
+                        this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>CUOTA </span></th>");
+                        this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>SALDO </span></th>");
+                        this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>DEUDA </span></th>");
+                    }
+                    else
+                    {
+                        this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>INGRESO</span></th>");
+                        this.arch.WriteLine("<th  bgcolor='#000000' scope='col'><span class='Estilo8'>EGRESO</span></th>");
+                    }
+
+                    this.arch.WriteLine("</tr>");
+
+                    for (int fil = 0; fil < this.dgvDetalleCaja.Rows.Count; fil++)
+                    {
+                        this.arch.WriteLine("<tr>");
+                        this.arch.WriteLine("<td><div align='center' class='Estilo10'>" + DateTime.Parse(this.dgvDetalleCaja[1, fil].Value.ToString()).ToString("dd/MM/yyyy") + "</div></td>");
+                        this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[2, fil].Value.ToString() + "</div></td>");
+                        this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[3, fil].Value.ToString() + "</div></td>");
+                        this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[4, fil].Value.ToString() + "</div></td>");
+
+                        if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas")
+                        {
+                            this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[5, fil].Value.ToString() + "</div></td>");
+                            this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[6, fil].Value.ToString() + "</div></td>");
+                            this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[7, fil].Value.ToString() + "</div></td>");
+                            this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[8, fil].Value.ToString() + "</div></td>");
+                        }
+                        else
+                        {
+                            this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[6, fil].Value.ToString() + "</div></td>");
+                            this.arch.WriteLine("<td><div align='center' class='Estilo10'>&nbsp;" + this.dgvDetalleCaja[7, fil].Value.ToString() + "</div></td>");
+                        }
+
+                        this.arch.WriteLine("</tr>");
+                    }
+
+                    this.arch.WriteLine("<tr>");
+
+                    if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas") this.arch.WriteLine("<td bgcolor='#000000' colspan='8'>&nbsp;</td>");
+                    else this.arch.WriteLine("<td bgcolor='#000000' colspan='6'>&nbsp;</td>");
+
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+
+                    if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas") this.arch.WriteLine("<td colspan='7'><div align='center' class='Estilo10'>");
+                    else this.arch.WriteLine("<td colspan='5'><div align='center' class='Estilo10'>");
+
+                    this.arch.WriteLine("<div align='right' class='Estilo7'>TOTAL INGRESO $:</div>");
+                    this.arch.WriteLine("</div></td>");
+                    this.arch.WriteLine("<td><div align='center' class='Estilo10'><strong>" + this.txtTotalIngreso.Text + "</strong></div></td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+
+                    if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas") this.arch.WriteLine("<td colspan='7'><div align='center' class='Estilo10'>");
+                    else this.arch.WriteLine("<td colspan='5'><div align='center' class='Estilo10'>");
+
+                    this.arch.WriteLine("<div align='right' class='Estilo7'>TOTAL EGRESO $:</div>");
+                    this.arch.WriteLine("</div></td>");
+                    this.arch.WriteLine("<td><div align='center' class='Estilo10'><strong>" + this.txtTotalEgreso.Text + "</strong></div></td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("<tr>");
+
+                    if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas") this.arch.WriteLine("<td colspan='7'><div align='center' class='Estilo10'>");
+                    else this.arch.WriteLine("<td colspan='5'><div align='center' class='Estilo10'>");
+
+                    this.arch.WriteLine("<div align='right' class='Estilo7'>TOTAL $:</div>");
+                    this.arch.WriteLine("</div></td>");
+                    this.arch.WriteLine("<td><div align='center' class='Estilo10'><strong>" + this.txtTotalCaja.Text + "</strong></div></td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("</table>");
+                    this.arch.WriteLine("</td>");
+                    this.arch.WriteLine("</tr>");
+                    this.arch.WriteLine("</table>");
+                    this.arch.WriteLine("</body>");
+                    this.arch.WriteLine("</html>");
+
+                    this.arch.Close();
+
+                    System.Diagnostics.Process.Start(this.ruta);
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
         }
     }
 }

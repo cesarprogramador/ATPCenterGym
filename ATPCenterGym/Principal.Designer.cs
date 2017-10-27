@@ -243,6 +243,7 @@
             this.btnVistaPrevia.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVistaPrevia.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnVistaPrevia.UseVisualStyleBackColor = true;
+            this.btnVistaPrevia.Click += new System.EventHandler(this.btnVistaPrevia_Click);
             // 
             // btnCajaDia
             // 
