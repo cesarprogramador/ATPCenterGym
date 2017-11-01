@@ -62,7 +62,7 @@ namespace ATPCenterGym
                     this.txtDpto.Text = this._emp.Tables["Empleado"].Rows[0][11].ToString();
                     this.cbEspecialidad.Text = this._emp.Tables["Empleado"].Rows[0][12].ToString();
                     this.cbPunto.Text = this._emp.Tables["Empleado"].Rows[0][13].ToString();
-                    // this.pbxFoto.ImageLocation = this._emp.Tables["Empleado"].Rows[0][2].ToString();
+                    // this.pbxFoto.ImageLocation = this._emp.Tables["Empleado"].Rows[0][15].ToString();
                 }
 
                 this.gbxAcciones.Enabled = true;
@@ -88,6 +88,19 @@ namespace ATPCenterGym
             this.cbPunto.DataSource = _puntos;
             this.cbPunto.ValueMember = "idpunto";
             this.cbPunto.DisplayMember = "nombrepunto";
+
+            this._profesores.idespecialidad = "0";
+            this._profesores.especialidad = "";
+
+            DataTable _especialidad = this._profesores.BuscarEspecialidad(this._profesores);
+
+            this.cbBusEspecialidad.DataSource = _especialidad;
+            this.cbBusEspecialidad.ValueMember = "idespecialidad";
+            this.cbBusEspecialidad.DisplayMember = "especialidad";
+
+            this.cbEspecialidad.DataSource = _especialidad;
+            this.cbEspecialidad.ValueMember = "idespecialidad";
+            this.cbEspecialidad.DisplayMember = "especialidad";
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -143,7 +156,7 @@ namespace ATPCenterGym
             this._profesores.dpto = this.txtDpto.Text;
             this._profesores.punto = this.cbPunto.Text;
             this._profesores.tipopersona = "Profesor";
-            this._profesores.especialidad = this.cbEspecialidad.Text;
+            this._profesores.idespecialidad = this.cbEspecialidad.SelectedValue.ToString();
             this._profesores.urlfoto = "...";
             this._profesores.accion = this.bandera;
             this._profesores.fechaaccion = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");

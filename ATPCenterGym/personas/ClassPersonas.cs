@@ -30,7 +30,6 @@ namespace ATPCenter.personas
         public string piso{get;set;}
         public string dpto{get;set;}
         public string tipopersona{get;set;}
-        public string especialidad { get; set; }
         public string apellidocotacto { get; set; }
         public string nombrecontacto{get;set;}
         public string telcontacto{get;set;}
@@ -38,7 +37,9 @@ namespace ATPCenter.personas
         public string emailcontacto{get;set;}
         public string idpunto { get; set; }
         public string nombrepunto { get; set; }
-        
+        public string idespecialidad { get; set; }
+        public string especialidad { get; set; }
+
         public string accion{get;set;}
         public string fechaaccion{get;set;}
         public int idempleadoaccion{get;set;}
@@ -75,7 +76,7 @@ namespace ATPCenter.personas
 
         public DataSet ABMPersona(ClassPersonas _empleado,string _tabla)
         {
-            sql="CALL sp_abmpersona("+_empleado.idpersona+",'"+_empleado.apellido+"','"+_empleado.nombre+"','"+_empleado.fechanac+"','"+_empleado.dni+"','"+_empleado.cuil+"','"+_empleado.cel+"','"+_empleado.tel+"','"+_empleado.correo+"','"+_empleado.calle+"','"+_empleado.numero+"','"+_empleado.piso+"','"+_empleado.dpto+"','"+_empleado.punto+"','"+_empleado.tipopersona+"','"+_empleado.urlfoto+"','"+_empleado.apellidocotacto+"','"+_empleado.nombrecontacto+"','"+_empleado.celcontacto+"','"+_empleado.telcontacto+"','"+_empleado.emailcontacto+"','"+_empleado.cuit+"','"+_empleado.accion+"','"+_empleado.fechaaccion+"','"+_empleado.idempleadoaccion+"','"+_empleado.idpuntoaccion+"');";
+            sql = "CALL sp_abmpersona(" + _empleado.idpersona + ",'" + _empleado.apellido + "','" + _empleado.nombre + "','" + _empleado.fechanac + "','" + _empleado.dni + "','" + _empleado.cuil + "','" + _empleado.cel + "','" + _empleado.tel + "','" + _empleado.correo + "','" + _empleado.calle + "','" + _empleado.numero + "','" + _empleado.piso + "','" + _empleado.dpto + "','" + _empleado.punto + "','" + _empleado.tipopersona + "','" + _empleado.urlfoto + "','" + _empleado.apellidocotacto + "','" + _empleado.nombrecontacto + "','" + _empleado.celcontacto + "','" + _empleado.telcontacto + "','" + _empleado.emailcontacto + "','" + _empleado.cuit + "','" + _empleado.idespecialidad + "','" + _empleado.accion + "','" + _empleado.fechaaccion + "','" + _empleado.idempleadoaccion + "','" + _empleado.idpuntoaccion + "');";
 
             return this.RealizarAccion(sql, _tabla);
         }
@@ -94,6 +95,13 @@ namespace ATPCenter.personas
         public DataTable BuscarPuntos(ClassPersonas _empleado)
         {
             sql = "CALL sp_buscadorpuntos(" + _empleado.idpunto + ",'" + _empleado.nombrepunto + "',0,100);";
+
+            return this.RealizarAccion(sql);
+        }
+
+        public DataTable BuscarEspecialidad(ClassPersonas _empleado)
+        {
+            sql = "CALL sp_buscadorespecialidades(" + _empleado.idespecialidad + ",'" + _empleado.especialidad + "',0,100);";
 
             return this.RealizarAccion(sql);
         }

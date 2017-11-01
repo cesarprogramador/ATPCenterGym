@@ -51,7 +51,7 @@ CREATE TABLE `cajadeldia` (
   `idpuntoaccion` int(11) DEFAULT NULL,
   `idgasto` int(11) DEFAULT NULL,
   PRIMARY KEY (`idcajadeldia`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 /*Data for the table `cajadeldia` */
 
@@ -68,7 +68,11 @@ insert  into `cajadeldia`(`idcajadeldia`,`fechacarga`,`montoegreso`,`montoingres
 (27,'2017-10-26 00:00:00','2500','0','.',0,'B','2017-10-26 03:27:40',1,1,16),
 (30,'2017-10-26 00:00:00','0','50','Pago de cuota',67,'N','2017-10-26 03:40:31',1,1,0),
 (29,'2017-10-26 00:00:00','6000','0','Gasto: Nuevo gasto de LUZ con multa Modifico el monto de 5890 a 6000 y el punto por TV y factura C y proveedor 2',0,'M','2017-10-26 03:27:17',1,1,23),
-(31,'2017-10-26 00:00:00','450','0','Gasto: Se paga Luz',0,'N','2017-10-26 03:45:05',1,1,24);
+(31,'2017-10-26 00:00:00','450','0','Gasto: Se paga Luz',0,'N','2017-10-26 03:45:05',1,1,24),
+(32,'2017-10-27 00:00:00','0','800','Pago de cuota',69,'N','2017-10-27 03:26:12',1,1,0),
+(33,'2017-10-27 00:00:00','0','800','Pago de cuota',72,'N','2017-10-27 03:35:53',1,1,0),
+(34,'2017-10-20 00:00:00','500','0','Gasto: SE PAGA LA LUZ',0,'N','2017-10-27 03:37:46',1,1,25),
+(35,'2017-10-27 00:00:00','500','0','Gasto: SE PAGA LA LUZ DEL LOCAL',0,'N','2017-10-27 03:38:37',1,1,26);
 
 /*Table structure for table `clases` */
 
@@ -109,7 +113,7 @@ CREATE TABLE `cuotas` (
   `cuotanum` int(11) DEFAULT NULL,
   `idpuntoaccion` int(11) DEFAULT NULL,
   PRIMARY KEY (`idcuota`)
-) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 /*Data for the table `cuotas` */
 
@@ -123,7 +127,12 @@ insert  into `cuotas`(`idcuota`,`idcurso`,`fechapago`,`fecharealpago`,`montocuot
 (65,25,'2017-11-25',NULL,'1000',NULL,'500','N','2017-10-25 03:48:45',1,2,1),
 (66,23,'2017-12-26',NULL,'500',NULL,'700','N','2017-10-25 03:49:48',1,4,1),
 (67,26,'2017-10-26','2017-10-26','450','50','0','M','2017-10-26 03:40:31',1,1,1),
-(68,26,'2017-11-26',NULL,'450',NULL,'400','N','2017-10-26 03:40:31',1,2,1);
+(68,26,'2017-11-26',NULL,'450',NULL,'400','N','2017-10-26 03:40:31',1,2,1),
+(69,27,'2017-10-27','2017-10-27','800','800','0','M','2017-10-27 03:26:12',1,1,1),
+(70,28,'2017-10-27',NULL,'80','0','0','B','2017-10-27 03:26:00',1,1,1),
+(71,27,'2017-11-27',NULL,'800',NULL,'0','N','2017-10-27 03:26:12',1,2,1),
+(72,29,'2017-10-27','2017-10-27','800','800','0','M','2017-10-27 03:35:53',1,1,1),
+(73,29,'2017-11-27',NULL,'800',NULL,'0','N','2017-10-27 03:35:53',1,2,1);
 
 /*Table structure for table `cursos` */
 
@@ -139,7 +148,7 @@ CREATE TABLE `cursos` (
   `idempleadoaccion` int(11) DEFAULT NULL,
   `idpuntoaccion` int(11) DEFAULT NULL,
   PRIMARY KEY (`idcurso`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 /*Data for the table `cursos` */
 
@@ -163,7 +172,10 @@ insert  into `cursos`(`idcurso`,`idclase`,`idpunto`,`idpersona`,`accion`,`fechaa
 (23,1,2,49,'N','2017-09-26 11:46:58',1,1),
 (24,1,2,63,'N','2017-10-25 03:29:43',1,1),
 (25,3,2,63,'N','2017-10-25 03:47:51',1,1),
-(26,1,2,48,'N','2017-10-26 03:39:27',1,1);
+(26,1,2,48,'N','2017-10-26 03:39:27',1,1),
+(27,1,2,68,'N','2017-10-27 03:25:19',1,1),
+(28,2,2,68,'B','2017-10-27 03:26:00',1,1),
+(29,1,2,69,'N','2017-10-27 03:35:44',1,1);
 
 /*Table structure for table `diaslaborales` */
 
@@ -181,6 +193,26 @@ CREATE TABLE `diaslaborales` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `diaslaborales` */
+
+/*Table structure for table `especialidades` */
+
+DROP TABLE IF EXISTS `especialidades`;
+
+CREATE TABLE `especialidades` (
+  `idespecialidad` int(11) NOT NULL AUTO_INCREMENT,
+  `especialidad` varchar(30) DEFAULT NULL,
+  `accion` varchar(1) DEFAULT NULL,
+  `fechaaccion` datetime DEFAULT NULL,
+  `idempleadoaccion` int(11) DEFAULT NULL,
+  `idpuntoaccion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idespecialidad`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `especialidades` */
+
+insert  into `especialidades`(`idespecialidad`,`especialidad`,`accion`,`fechaaccion`,`idempleadoaccion`,`idpuntoaccion`) values 
+(1,'Ninguna','N','2017-10-27 15:04:17',1,1),
+(2,'Otras','N','2017-10-27 15:04:23',1,1);
 
 /*Table structure for table `gastos` */
 
@@ -201,7 +233,7 @@ CREATE TABLE `gastos` (
   `idpunto` int(11) DEFAULT NULL,
   `idpuntoaccion` int(11) DEFAULT NULL,
   PRIMARY KEY (`idgasto`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 /*Data for the table `gastos` */
 
@@ -213,7 +245,9 @@ insert  into `gastos`(`idgasto`,`numerofactura`,`tipofactura`,`idpersona`,`monto
 (15,'C1','C',52,'600','2017-10-26 01:57:01','2017-10-26','Nuevo  khjkjhkjh','M','2017-10-26 02:52:02',1,1,1),
 (16,'BG1234','B',61,'2500','2017-10-26 02:05:31','2017-10-26','Se pago Telefono - Moficaado','B','2017-10-26 03:27:40',1,2,1),
 (23,'147258369','C',51,'6000','2017-10-26 03:06:08','2017-10-26','Nuevo gasto de LUZ con multa Modifico el monto de 5890 a 6000 y el punto por TV y factura C y proveedor 2','M','2017-10-26 03:27:17',1,2,1),
-(24,'A133','A',64,'450','2017-10-26 03:44:28','2017-10-26','Se paga Luz','N','2017-10-26 03:45:05',1,1,1);
+(24,'A133','A',64,'450','2017-10-26 03:44:28','2017-10-26','Se paga Luz','N','2017-10-26 03:45:05',1,1,1),
+(25,'01111','X',64,'500','2017-10-27 03:37:16','2017-10-20','SE PAGA LA LUZ','N','2017-10-27 03:37:46',1,2,1),
+(26,'01147','X',64,'500','2017-10-27 03:38:03','2017-10-27','SE PAGA LA LUZ DEL LOCAL','N','2017-10-27 03:38:37',1,1,1);
 
 /*Table structure for table `jornadalaborales` */
 
@@ -263,76 +297,82 @@ CREATE TABLE `personas` (
   `idempleadoaccion` int(11) DEFAULT NULL,
   `idpuntoaccion` int(11) DEFAULT NULL,
   `usuario` varchar(30) DEFAULT NULL,
-  `password` varchar(30) DEFAULT NULL,
+  `passwordusuario` varchar(30) DEFAULT NULL,
   `cuit` varchar(50) DEFAULT NULL,
+  `idespecialidad` int(11) DEFAULT NULL,
   PRIMARY KEY (`idpersona`)
-) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
 
 /*Data for the table `personas` */
 
-insert  into `personas`(`idpersona`,`apellido`,`nombre`,`fechanacimiento`,`dni`,`cuil`,`cel`,`tel`,`email`,`calle`,`numero`,`piso`,`dpto`,`idpunto`,`idtipopersona`,`apellidocontacto`,`nombrecontacto`,`emailcontacto`,`celcontacto`,`telcontacto`,`urlfoto`,`accion`,`fechaaccion`,`idempleadoaccion`,`idpuntoaccion`,`usuario`,`password`,`cuit`) values 
-(1,'Miguel','Miguel','2017-08-14','123456','20123456','1234','12345','miguel@atp.com','roca',150,'4','AD',1,1,'.','.','.','0','0','...','B','2017-09-08 03:36:35',1,1,NULL,NULL,NULL),
-(3,'CAMBIO','FINAL','2017-08-22','1','78','78','78','87','87',87,'87','87',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:08:50',1,1,NULL,NULL,NULL),
-(4,'NUEVO','NUEVO','2017-08-22','2','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:09:17',1,1,NULL,NULL,NULL),
-(5,'NUEVO','NUEVO','2017-08-22','3','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:09:36',1,1,NULL,NULL,NULL),
-(6,'NUEVO','NUEVO','2017-08-22','4','11','12','123','NUEVO@','Salta',141,'6','D3',1,5,'Ape contact','Nombre contact','emailcontacto','4564987','654654','...','A','2017-08-22 02:09:47',1,1,NULL,NULL,NULL),
-(7,'NUEVO','NUEVO','2017-08-22','5','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:09:56',1,1,NULL,NULL,NULL),
-(8,'NUEVO','NUEVO','2017-08-22','6','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:25:35',1,1,NULL,NULL,NULL),
-(9,'NUEVO','NUEVO','2017-08-22','7','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:28:00',1,1,NULL,NULL,NULL),
-(10,'NUEVO','NUEVO','2017-08-22','8','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:33',1,1,NULL,NULL,NULL),
-(11,'NUEVO','NUEVO','2017-08-22','9','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:39',1,1,NULL,NULL,NULL),
-(12,'NUEVO','NUEVO','2017-08-22','11','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:44',1,1,NULL,NULL,NULL),
-(13,'NUEVO','NUEVO','2017-08-22','23','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:59',1,1,NULL,NULL,NULL),
-(14,'NUEVO','NUEVO','2017-08-22','44','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:30:05',1,1,NULL,NULL,NULL),
-(15,'NUEVO','NUEVO','2017-08-22','55','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:30:10',1,1,NULL,NULL,NULL),
-(16,'segundo','cambio','2017-08-22','66','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:30:23',1,1,NULL,NULL,NULL),
-(17,'NUEVO','NUEVO','2017-08-22','77','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:44:19',1,1,NULL,NULL,NULL),
-(18,'NUEVO','NUEVO','2017-08-22','88','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-22 12:49:00',1,1,NULL,NULL,NULL),
-(19,'NUEVO','NUEVO','2017-08-22','99','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:31:04',1,1,NULL,NULL,NULL),
-(20,'NUEVO','NUEVO','2017-08-22','123','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:47:23',1,1,NULL,NULL,NULL),
-(21,'NUEVO','NUEVO','2017-08-22','124','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 03:39:21',1,1,NULL,NULL,NULL),
-(22,'tercer','cambio','2017-08-22','178','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:30:49',1,1,NULL,NULL,NULL),
-(23,'se corrigio','por otro','2017-08-22','67','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:47:40',1,1,NULL,NULL,NULL),
-(24,'NUEVO 4747','NUEVO','2017-08-22','787','11','12','123','NUEVO@','Salta',141,'6','D3',2,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 03:36:21',1,1,NULL,NULL,NULL),
-(25,'NUEVO','NUEVO','2017-08-22','321','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-22 12:49:00',1,1,NULL,NULL,NULL),
-(26,'SE actualizo','categoría','2017-08-22','64','11','12','123','NUEVO@','Salta',141,'6','D3',2,1,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:48:42',1,1,NULL,NULL,NULL),
-(27,'NUEVO','NUEVO','2017-08-22','484','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:53',1,1,NULL,NULL,NULL),
-(28,'desd','wind','1981-08-01','4444','52','78','45','fof@ww','dosde',45,'7','8d',2,2,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-22 01:55:48',1,1,'usu','123',NULL),
-(29,'se orrige','al profesor','1981-05-01','41','41','41','41','41aaa@','45',89999,'0','0',2,3,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 11:39:07',1,1,NULL,NULL,NULL),
-(30,'kjhkhj','kjhkjh','1822-04-01','84369','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-22 11:49:41',1,1,NULL,NULL,NULL),
-(31,'corregido','kjhkjh','1822-04-01','4855','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','M','2017-09-08 03:41:03',1,1,NULL,NULL,NULL),
-(32,'kjhkhj','kjhkjh','1822-04-01','8885','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-23 01:48:39',1,1,NULL,NULL,NULL),
-(33,'actualizado','kjhkjh','1822-04-01','258','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-23 02:16:10',1,1,NULL,NULL,NULL),
-(34,'kjhkhj','kjhkjh','1822-04-01','159','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 04:02:48',1,1,NULL,NULL,NULL),
-(35,'kjhkhj','kjhkjh','1822-04-01','753','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-23 02:14:41',1,1,NULL,NULL,NULL),
-(36,'profe','modificado','1822-04-01','4567','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-23 02:15:48',1,1,NULL,NULL,NULL),
-(37,'kjhkhj','kjhkjh','1822-04-01','6464','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-23 01:48:39',1,1,NULL,NULL,NULL),
-(38,'kjhkhj','kjhkjh','1822-04-01','8542','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 03:42:45',1,1,NULL,NULL,NULL),
-(39,'kjhkhj','kjhkjh','1822-04-01','5624','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-23 02:15:02',1,1,NULL,NULL,NULL),
-(40,'kjhkhj','kjhkjh','1822-04-01','2036','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-23 01:48:39',1,1,NULL,NULL,NULL),
-(41,'nuevo','socio','1849-11-04','759','111112222','11112220000','01132154','se modifico','cococo',4564,'4','4sss',1,4,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-23 08:10:06',1,1,NULL,NULL,NULL),
-(42,'ppp nuevo','socio nuevo','1849-11-04','1532','111112222','11112220000','01132154','se modifico','cococo',4564,'4','4sss',2,4,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-23 08:14:35',1,1,NULL,NULL,NULL),
-(43,'Flores','Cesar','1592-08-04','1234500','0','0','0','jomolca@live.com.ar','0',0,'0','0',1,4,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-23 08:09:19',1,1,NULL,NULL,NULL),
-(44,'Tecno','Marth','1892-04-01','1122345','2012345','.','.','marth@gmail.com','.',0,'0','0',2,4,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-28 02:32:57',1,1,NULL,NULL,NULL),
-(45,'.','Proveedor 1',NULL,NULL,NULL,'12341234','1234','proveedor1@pro1','.',0,'0','0',NULL,5,'c1','n1','aaa@www.com','1232','321',NULL,'N','2017-08-30 16:57:29',1,1,NULL,NULL,NULL),
-(46,'NUEVO 45454','NUEVO','2017-08-22','321','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 03:05:43',1,1,NULL,NULL,NULL),
-(48,'nuevo 2017','nuevo 2017','1235-04-01','2017','2017','0','0','0','0',0,'0','0',2,4,NULL,NULL,NULL,NULL,NULL,'...','N','2017-09-08 07:57:32',1,1,'admin','1234',NULL),
-(49,'Prueba','Itan','2010-08-01','1203120312','20120312035','0','0','itn@ddd,com','Colon',78,'0','0',2,4,NULL,NULL,NULL,NULL,NULL,'...','M','2017-09-26 11:10:21',1,1,NULL,NULL,NULL),
-(50,'','proveedores 1','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',1,5,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1'),
-(51,'','proveedores 2','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',1,5,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1'),
-(52,'','proveedores 3','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',1,5,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1'),
-(53,'','proveedores 1','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',NULL,NULL,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1'),
-(54,'','proveedores 1','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',NULL,NULL,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1'),
-(55,'','proveedores 1','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',NULL,NULL,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1'),
-(56,'','kjhkjh','0000-00-00','','','654','654','65','654',654,'654','654',NULL,NULL,'lkj','lkj','lkj','654','654','','N','2017-10-11 11:05:42',1,1,NULL,NULL,'654'),
-(57,'','kjhkjh','0000-00-00','','','654','654','65','654',654,'654','654',NULL,NULL,'lkj','lkj','lkj','654','654','','N','2017-10-11 11:05:42',1,1,NULL,NULL,'654'),
-(58,'','kjhkjh','0000-00-00','','','654','654','65','654',654,'654','654',NULL,NULL,'lkj','lkj','lkj','654','654','','N','2017-10-11 11:05:42',1,1,NULL,NULL,'654'),
-(59,'','kjhkjh','0000-00-00','','','654','654','65','654',654,'654','654',NULL,NULL,'lkj','lkj','lkj','654','654','','N','2017-10-11 11:05:42',1,1,NULL,NULL,'654'),
-(60,'','modifica','0000-00-00','','','654','654','65','654',654,'654','654',NULL,5,'se corrije','lkj','lkj','654','654','','B','2017-10-12 06:13:23',1,1,NULL,NULL,'654'),
-(61,'','nuevo proveedor','0000-00-00','','','1234','1234','prove@ddd.com','calle',1,'2','3',NULL,5,'valeria','hola jose','pro@modi.com','123456','123456','','M','2017-10-12 06:01:56',1,1,NULL,NULL,'1234'),
-(62,'yoni','Marth','1892-04-01','1122345','2012345','.','.','marth@gmail.com','.',0,'0','0',2,4,'','','','','','...','N','2017-10-25 03:03:33',1,1,NULL,NULL,''),
-(63,'lillo','socio','1981-04-01','1234666','12345554','1','1','.','.',0,'0','0',2,4,'','','','','','...','N','2017-10-25 03:29:25',1,1,NULL,NULL,''),
-(64,'','EDET','2017-10-26','','','0','0','.','.',0,'0','0',NULL,5,'.','.','0','0','0','','N','2017-10-26 03:05:21',1,1,NULL,NULL,'0');
+insert  into `personas`(`idpersona`,`apellido`,`nombre`,`fechanacimiento`,`dni`,`cuil`,`cel`,`tel`,`email`,`calle`,`numero`,`piso`,`dpto`,`idpunto`,`idtipopersona`,`apellidocontacto`,`nombrecontacto`,`emailcontacto`,`celcontacto`,`telcontacto`,`urlfoto`,`accion`,`fechaaccion`,`idempleadoaccion`,`idpuntoaccion`,`usuario`,`passwordusuario`,`cuit`,`idespecialidad`) values 
+(1,'Miguel','Miguel','2017-08-14','123456','20123456','1234','12345','miguel@atp.com','roca',150,'4','AD',1,1,'.','.','.','0','0','...','B','2017-09-08 03:36:35',1,1,NULL,NULL,NULL,1),
+(3,'CAMBIO','FINAL','2017-08-22','1','78','78','78','87','87',87,'87','87',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:08:50',1,1,NULL,NULL,NULL,1),
+(4,'NUEVO','NUEVO','2017-08-22','2','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:09:17',1,1,NULL,NULL,NULL,1),
+(5,'NUEVO','NUEVO','2017-08-22','3','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:09:36',1,1,NULL,NULL,NULL,1),
+(6,'NUEVO','NUEVO','2017-08-22','4','11','12','123','NUEVO@','Salta',141,'6','D3',1,5,'Ape contact','Nombre contact','emailcontacto','4564987','654654','...','A','2017-08-22 02:09:47',1,1,NULL,NULL,NULL,1),
+(7,'NUEVO','NUEVO','2017-08-22','5','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:09:56',1,1,NULL,NULL,NULL,1),
+(8,'NUEVO','NUEVO','2017-08-22','6','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:25:35',1,1,NULL,NULL,NULL,1),
+(9,'NUEVO','NUEVO','2017-08-22','7','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:28:00',1,1,NULL,NULL,NULL,1),
+(10,'NUEVO','NUEVO','2017-08-22','8','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:33',1,1,NULL,NULL,NULL,1),
+(11,'NUEVO','NUEVO','2017-08-22','9','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:39',1,1,NULL,NULL,NULL,1),
+(12,'NUEVO','NUEVO','2017-08-22','11','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:44',1,1,NULL,NULL,NULL,1),
+(13,'NUEVO','NUEVO','2017-08-22','23','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:59',1,1,NULL,NULL,NULL,1),
+(14,'NUEVO','NUEVO','2017-08-22','44','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:30:05',1,1,NULL,NULL,NULL,1),
+(15,'NUEVO','NUEVO','2017-08-22','55','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:30:10',1,1,NULL,NULL,NULL,1),
+(16,'segundo','cambio','2017-08-22','66','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:30:23',1,1,NULL,NULL,NULL,1),
+(17,'NUEVO','NUEVO','2017-08-22','77','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:44:19',1,1,NULL,NULL,NULL,1),
+(18,'NUEVO','NUEVO','2017-08-22','88','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-22 12:49:00',1,1,NULL,NULL,NULL,1),
+(19,'NUEVO','NUEVO','2017-08-22','99','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:31:04',1,1,NULL,NULL,NULL,1),
+(20,'NUEVO','NUEVO','2017-08-22','123','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:47:23',1,1,NULL,NULL,NULL,1),
+(21,'NUEVO','NUEVO','2017-08-22','124','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 03:39:21',1,1,NULL,NULL,NULL,1),
+(22,'tercer','cambio','2017-08-22','178','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:30:49',1,1,NULL,NULL,NULL,1),
+(23,'se corrigio','por otro','2017-08-22','67','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:47:40',1,1,NULL,NULL,NULL,1),
+(24,'NUEVO 4747','NUEVO','2017-08-22','787','11','12','123','NUEVO@','Salta',141,'6','D3',2,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 03:36:21',1,1,NULL,NULL,NULL,1),
+(25,'NUEVO','NUEVO','2017-08-22','321','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-22 12:49:00',1,1,NULL,NULL,NULL,1),
+(26,'SE actualizo','categoría','2017-08-22','64','11','12','123','NUEVO@','Salta',141,'6','D3',2,1,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 02:48:42',1,1,NULL,NULL,NULL,1),
+(27,'NUEVO','NUEVO','2017-08-22','484','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-22 02:29:53',1,1,NULL,NULL,NULL,1),
+(28,'desd','wind','1981-08-01','4444','52','78','45','fof@ww','dosde',45,'7','8d',2,2,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-22 01:55:48',1,1,'usu','123',NULL,1),
+(29,'se orrige','al profesor','1981-05-01','41','41','41','41','41aaa@','45',89999,'0','0',2,3,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-22 11:39:07',1,1,NULL,NULL,NULL,1),
+(30,'kjhkhj','kjhkjh','1822-04-01','84369','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-22 11:49:41',1,1,NULL,NULL,NULL,1),
+(31,'corregido','kjhkjh','1822-04-01','4855','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','M','2017-09-08 03:41:03',1,1,NULL,NULL,NULL,1),
+(32,'kjhkhj','kjhkjh','1822-04-01','8885','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-23 01:48:39',1,1,NULL,NULL,NULL,1),
+(33,'actualizado','kjhkjh','1822-04-01','258','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-23 02:16:10',1,1,NULL,NULL,NULL,1),
+(34,'kjhkhj','kjhkjh','1822-04-01','159','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 04:02:48',1,1,NULL,NULL,NULL,1),
+(35,'kjhkhj','kjhkjh','1822-04-01','753','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-23 02:14:41',1,1,NULL,NULL,NULL,1),
+(36,'profe','modificado','1822-04-01','4567','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','M','2017-08-23 02:15:48',1,1,NULL,NULL,NULL,1),
+(37,'kjhkhj','kjhkjh','1822-04-01','6464','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-23 01:48:39',1,1,NULL,NULL,NULL,1),
+(38,'kjhkhj','kjhkjh','1822-04-01','8542','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 03:42:45',1,1,NULL,NULL,NULL,1),
+(39,'kjhkhj','kjhkjh','1822-04-01','5624','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-23 02:15:02',1,1,NULL,NULL,NULL,1),
+(40,'kjhkhj','kjhkjh','1822-04-01','2036','654','654','654','64','654',654,'654','564',1,3,NULL,NULL,NULL,NULL,NULL,'...','N','2017-08-23 01:48:39',1,1,NULL,NULL,NULL,1),
+(41,'nuevo','socio','1849-11-04','759','111112222','11112220000','01132154','se modifico','cococo',4564,'4','4sss',1,4,NULL,NULL,NULL,NULL,NULL,'...','B','2017-10-27 03:29:17',1,1,NULL,NULL,NULL,1),
+(42,'ppp nuevo','socio nuevo','1849-11-04','1532','111112222','11112220000','01132154','se modifico','cococo',4564,'4','4sss',2,4,NULL,NULL,NULL,NULL,NULL,'...','B','2017-08-23 08:14:35',1,1,NULL,NULL,NULL,1),
+(43,'Flores','Cesar','1592-08-04','1234500','0','0','0','jomolca@live.com.ar','0',0,'0','0',1,4,NULL,NULL,NULL,NULL,NULL,'...','B','2017-10-27 03:31:21',1,1,NULL,NULL,NULL,1),
+(44,'Tecno','Marth','1892-04-01','1122345','2012345','.','.','marth@gmail.com','.',0,'0','0',2,4,NULL,NULL,NULL,NULL,NULL,'...','B','2017-10-27 03:28:36',1,1,NULL,NULL,NULL,1),
+(45,'.','Proveedor 1',NULL,NULL,NULL,'12341234','1234','proveedor1@pro1','.',0,'0','0',NULL,5,'c1','n1','aaa@www.com','1232','321',NULL,'N','2017-08-30 16:57:29',1,1,NULL,NULL,NULL,1),
+(46,'NUEVO 45454','NUEVO','2017-08-22','321','11','12','123','NUEVO@','Salta',141,'6','D3',1,2,NULL,NULL,NULL,NULL,NULL,'...','B','2017-09-08 03:05:43',1,1,NULL,NULL,NULL,1),
+(48,'nuevo 2017','nuevo 2017','1235-04-01','2017','2017','0','0','0','0',0,'0','0',2,4,NULL,NULL,NULL,NULL,NULL,'...','N','2017-09-08 07:57:32',1,1,'admin','1234',NULL,1),
+(49,'Prueba','Itan','2010-08-01','1203120312','20120312035','0','0','itn@ddd,com','Colon',78,'0','0',2,4,NULL,NULL,NULL,NULL,NULL,'...','M','2017-09-26 11:10:21',1,1,NULL,NULL,NULL,1),
+(50,'','proveedores 1','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',1,5,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1',1),
+(51,'','proveedores 2','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',1,5,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1',1),
+(52,'','proveedores 3','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',1,5,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1',1),
+(53,'','proveedores 1','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',NULL,NULL,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1',1),
+(54,'','proveedores 1','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',NULL,NULL,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1',1),
+(55,'','proveedores 1','0000-00-00','','','1','1','prov@ddd,com','khjkjh',45,'45','54',NULL,NULL,'ape con','nombre con','contacto@co.com','4477','7777','','N','2017-10-05 01:23:43',1,1,NULL,NULL,'1234prov1',1),
+(56,'','kjhkjh','0000-00-00','','','654','654','65','654',654,'654','654',NULL,NULL,'lkj','lkj','lkj','654','654','','N','2017-10-11 11:05:42',1,1,NULL,NULL,'654',1),
+(57,'','kjhkjh','0000-00-00','','','654','654','65','654',654,'654','654',NULL,NULL,'lkj','lkj','lkj','654','654','','N','2017-10-11 11:05:42',1,1,NULL,NULL,'654',1),
+(58,'','kjhkjh','0000-00-00','','','654','654','65','654',654,'654','654',NULL,NULL,'lkj','lkj','lkj','654','654','','N','2017-10-11 11:05:42',1,1,NULL,NULL,'654',1),
+(59,'','kjhkjh','0000-00-00','','','654','654','65','654',654,'654','654',NULL,NULL,'lkj','lkj','lkj','654','654','','N','2017-10-11 11:05:42',1,1,NULL,NULL,'654',1),
+(60,'','modifica','0000-00-00','','','654','654','65','654',654,'654','654',NULL,5,'se corrije','lkj','lkj','654','654','','B','2017-10-12 06:13:23',1,1,NULL,NULL,'654',1),
+(61,'','nuevo proveedor','0000-00-00','','','1234','1234','prove@ddd.com','calle',1,'2','3',NULL,5,'valeria','hola jose','pro@modi.com','123456','123456','','M','2017-10-12 06:01:56',1,1,NULL,NULL,'1234',1),
+(62,'yoni','Marth','1892-04-01','1122345','2012345','.','.','marth@gmail.com','.',0,'0','0',2,4,'','','','','','...','B','2017-10-27 03:28:57',1,1,NULL,NULL,'',1),
+(63,'lillo','socio','1981-04-01','1234666','12345554','1','1','.','.',0,'0','0',2,4,'','','','','','...','N','2017-10-25 03:29:25',1,1,NULL,NULL,'',1),
+(64,'','EDET','2017-10-26','','','0','0','.','.',0,'0','0',NULL,5,'.','.','0','0','0','','N','2017-10-26 03:05:21',1,1,NULL,NULL,'0',1),
+(65,'ESPECIAL','ESPECIAL','1981-05-01','415263','415263','41','41','41aaa@','45',89999,'0','0',1,3,'','','','','','...','B','2017-10-27 03:13:34',1,1,NULL,NULL,'',1),
+(66,'se modifico','f','2017-04-01','124','654','0','0','.','.',0,'0','.',1,3,'','','','','','...','B','2017-10-27 03:22:44',1,1,'124','','',1),
+(67,'','NUEVO 01 MODI','2017-10-27','','','1234','1234','prove@ddd.com','calle',1,'2','3',NULL,5,'PROVEEDOR','HOLA','MODIFICADO','123456','123456','','B','2017-10-27 03:24:10',1,1,'','','001234',1),
+(68,'NUEVA SO MOD','MODIFICADO','1981-04-01','9988','9988','0','0','.','0',0,'0','0',2,4,'','','','','','...','B','2017-10-27 03:27:27',1,1,'9988','','',1),
+(69,'NUEVO','SOCIO','1981-04-01','784512','784512','0','0','0','0',0,'0','0',2,4,'','','','','','...','N','2017-10-27 03:35:33',1,1,'784512','','',1);
 
 /*Table structure for table `puntos` */
 
@@ -607,6 +647,7 @@ DELIMITER $$
     IN _telcontacto VARCHAR(50),
     IN _emailcontacto VARCHAR(100),
     IN _cuit VARCHAR(50),
+    IN _idespecialidad INT,
     
     IN _accion varCHAR(1),
     IN _fechaaccion datetime,
@@ -620,11 +661,10 @@ select idpunto into _idpunto from puntos where nombrepunto=_punto;
 SELECT idtipopersona INTO _idtipo FROM tipopersonas WHERE tipopersona=_tipopersona;
 case _accion 
 when 'N' then
-	
-	INSERT INTO personas (apellido,nombre,fechanacimiento,dni,cuil,cel,tel,email,calle,numero,piso,dpto,idpunto,idtipopersona,urlfoto,apellidocontacto,nombrecontacto,celcontacto,telcontacto,emailcontacto,cuit,accion,fechaaccion,idempleadoaccion,idpuntoaccion) 
-	VALUE (_apellido,_nombre,_fechanac,_dni,_cuil,_cel,_tel,_email,_calle,_numero,_piso,_dpto,_idpunto,_idtipo,_urlfoto,_apecontacto,_nomcontacto,_celcontacto,_telcontacto,_emailcontacto,_cuit,_accion,_fechaaccion,_idempleadoacc,_idpuntoacc);
+	INSERT INTO personas (apellido,nombre,fechanacimiento,dni,cuil,cel,tel,email,calle,numero,piso,dpto,idpunto,idtipopersona,urlfoto,apellidocontacto,nombrecontacto,celcontacto,telcontacto,emailcontacto,cuit,accion,fechaaccion,idempleadoaccion,idpuntoaccion,idespecialidad,usuario,passwordusuario) 
+	VALUE (_apellido,_nombre,_fechanac,_dni,_cuil,_cel,_tel,_email,_calle,_numero,_piso,_dpto,_idpunto,_idtipo,_urlfoto,_apecontacto,_nomcontacto,_celcontacto,_telcontacto,_emailcontacto,_cuit,_accion,_fechaaccion,_idempleadoacc,_idpuntoacc,_idespecialidad,_dni,'');
 when 'M' then		
-	update personas set apellido=_apellido,nombre=_nombre,fechanacimiento=_fechanac,dni=_dni,cuil=_cuil,cel=_cel,tel=_tel,email=_email,calle=_calle,numero=_numero,piso=_piso,dpto=_dpto,idpunto=_idpunto,idtipopersona=_idtipo,urlfoto=_urlfoto,apellidocontacto=_apecontacto,nombrecontacto=_nomcontacto,celcontacto=_celcontacto,telcontacto=_telcontacto,emailcontacto=_emailcontacto,cuit=_cuit,accion=_accion,fechaaccion=_fechaaccion,idempleadoaccion=_idempleadoacc,idpuntoaccion=_idpuntoacc 
+	update personas set apellido=_apellido,nombre=_nombre,fechanacimiento=_fechanac,dni=_dni,cuil=_cuil,cel=_cel,tel=_tel,email=_email,calle=_calle,numero=_numero,piso=_piso,dpto=_dpto,idpunto=_idpunto,idtipopersona=_idtipo,urlfoto=_urlfoto,apellidocontacto=_apecontacto,nombrecontacto=_nomcontacto,celcontacto=_celcontacto,telcontacto=_telcontacto,emailcontacto=_emailcontacto,cuit=_cuit,accion=_accion,fechaaccion=_fechaaccion,idempleadoaccion=_idempleadoacc,idpuntoaccion=_idpuntoacc,idespecialidad=_idespecialidad 
 	where idpersona=_idempleado;
 WHEN 'B' THEN		
 	UPDATE personas SET accion=_accion,fechaaccion=_fechaaccion,idempleadoaccion=_idempleadoacc,idpuntoaccion=_idpuntoacc 
@@ -1044,6 +1084,43 @@ end if;
 END */$$
 DELIMITER ;
 
+/* Procedure structure for procedure `sp_buscadorespecialidades` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `sp_buscadorespecialidades` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscadorespecialidades`(
+    IN _idespecialidad int,
+    in _especialidad varchar(30),
+    IN _pag INT,
+    IN _cantfil INT
+    )
+BEGIN
+if (_idespecialidad<=0) then
+	PREPARE STMT FROM "SELECT a.idespecialidad,a.especialidad
+				FROM especialidades a 
+				   WHERE (a.accion!='B') AND (a.especialidad LIKE CONCAT(? ,'%'))
+				   ORDER BY a.especialidad
+				   LIMIT ?,?";
+		
+		SET @especialidad = _especialidad; 
+		SET @pag = _pag; 
+		SET @cantfil = _cantfil; 
+		EXECUTE STMT USING @especialidad,@pag,@cantfil;
+		DEALLOCATE PREPARE STMT;
+else			
+	PREPARE STMT FROM "SELECT a.idespecialidad,a.especialidad
+				FROM especialidades a 
+			   WHERE (a.idespecialidad LIKE CONCAT(? ,'%'))";
+		
+		SET @idespecialidad = _idespecialidad; 
+		EXECUTE STMT USING @idespecialidad;
+		DEALLOCATE PREPARE STMT;
+end if;
+END */$$
+DELIMITER ;
+
 /* Procedure structure for procedure `sp_buscadorgastos` */
 
 /*!50003 DROP PROCEDURE IF EXISTS  `sp_buscadorgastos` */;
@@ -1180,9 +1257,10 @@ if (_idempleado<=0) then
 		EXECUTE STMT USING @apellido,@nombre,@dni,@tipopersona,@punto,@pag,@cantfil;
 		DEALLOCATE PREPARE STMT;
 else			
-	PREPARE STMT FROM "SELECT a.apellido,a.nombre,a.fechanacimiento,a.dni,a.cuil,a.cel,a.tel,a.email,a.calle,a.numero,a.piso,a.dpto,b.tipopersona,c.nombrepunto,a.urlfoto
+	PREPARE STMT FROM "SELECT a.apellido,a.nombre,a.fechanacimiento,a.dni,a.cuil,a.cel,a.tel,a.email,a.calle,a.numero,a.piso,a.dpto,d.especialidad,c.nombrepunto,a.urlfoto
 				   FROM personas a INNER JOIN tipopersonas b ON (a.idtipopersona=b.idtipopersona)
 						   INNER JOIN puntos c ON (c.idpunto=a.idpunto AND c.accion!='B')
+						   INNER JOIN especialidades d ON (d.idespecialidad=a.idespecialidad) 
 				   WHERE (a.idpersona LIKE CONCAT(? ,'%'))";
 		
 		SET @idempleado = _idempleado; 
@@ -1423,7 +1501,7 @@ BEGIN
 					   INNER JOIN puntos c ON (c.idpunto=a.idpunto AND c.accion!='B')
 			   WHERE (a.accion!='B') AND 
 			         (a.usuario=?) AND 
-			         (a.password=?)";
+			         (a.passwordusuario=?)";
 		
 		SET @usuario = _usuario; 
 		SET @password = _password; 

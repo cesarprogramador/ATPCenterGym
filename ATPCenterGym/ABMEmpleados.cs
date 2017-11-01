@@ -147,6 +147,7 @@ namespace ATPCenterGym
             this._empleado.fechaaccion = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
             this._empleado.idempleadoaccion = 1; //Viene del login
             this._empleado.idpuntoaccion = 1; //Viene del login
+            this._empleado.idespecialidad = "1";
 
             this.dgvEmpleados.DataSource = this._empleado.ABMPersona(this._empleado, "accion");
             this.dgvEmpleados.DataMember = "accion";

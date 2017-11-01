@@ -121,6 +121,7 @@ namespace ATPCenterGym
             this._socios.fechaaccion = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
             this._socios.idempleadoaccion = 1; //Viene del login
             this._socios.idpuntoaccion = 1; //Viene del login
+            this._socios.idespecialidad = "1";
 
             this.dgvSocios.DataSource = this._socios.ABMPersona(this._socios, "accion");
             this.dgvSocios.DataMember = "accion";
@@ -139,7 +140,23 @@ namespace ATPCenterGym
             }
             else
             {
-                MessageBox.Show("Error en la ejecución de la acción en curso. Controle datos!!!", "Error!!!");
+                if (this.dgvSocios.Rows.Count == 0 && (this.bandera=="B"))
+                {
+                    this.dgvSocios.Columns[0].Visible = false;
+                    MessageBox.Show("Acción realizada con exito!!!", "Atención!!!");
+
+                    this.gbxDetalleCursos.Enabled = true;
+
+                    this.btnModificarInsc.Enabled = false;
+                    this.btnEliminarInsc.Enabled = false;
+
+                    this.btnCancelar_Click(sender, e);
+                }
+                else
+                {
+
+                    MessageBox.Show("Error en la ejecución de la acción en curso. Controle datos!!!", "Error!!!");
+                }
             }
         }
 

@@ -81,6 +81,8 @@ namespace ATPCenterGym
                 this.dgvHistorialCuotas.Columns[0].Visible = false;
                 //Fecha real pago
                 this.dgvHistorialCuotas.Columns[2].Visible = false;
+
+                MessageBox.Show("Acción realizada con exito!!!", "Atención!!!");
             }
         }
 
