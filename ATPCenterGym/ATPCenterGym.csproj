@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Music\SistemaReclamos\MySql.Data.dll</HintPath>
@@ -102,6 +103,13 @@
     <Compile Include="ABMSocios.Designer.cs">
       <DependentUpon>ABMSocios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Asistencias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Asistencias.Designer.cs">
+      <DependentUpon>Asistencias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="asistencias\ClassAsistencias.cs" />
     <Compile Include="cajadeldia\ClassCajaDelDia.cs" />
     <Compile Include="conexion\ClassConexion.cs" />
     <Compile Include="email\ClassEmail.cs" />
@@ -150,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABMSocios.resx">
       <DependentUpon>ABMSocios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Asistencias.resx">
+      <DependentUpon>Asistencias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -233,6 +244,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\black.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
