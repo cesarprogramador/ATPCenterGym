@@ -1,4 +1,5 @@
 ﻿using ATPCenter.tiposdeclase;
+using ATPCenterGym.email;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ namespace ATPCenterGym
         decimal _deuda = 0;
         StreamWriter arch;
         string ruta = "";
+        ClassEmail email;
 
         public ABMCuotas()
         {
@@ -61,7 +63,7 @@ namespace ATPCenterGym
             this._inscrialu.idcuota = this.dgvHistorialCuotas[0, this.dgvHistorialCuotas.CurrentCell.RowIndex].Value.ToString();
             this._inscrialu.numcuota = int.Parse(this.dgvHistorialCuotas[1, this.dgvHistorialCuotas.CurrentCell.RowIndex].Value.ToString()) + 1;
             this._inscrialu.idcurso = this._idcurso;
-            this._inscrialu.fecharealpago = DateTime.Now.ToString("yyyy/MM/dd");
+            this._inscrialu.fecharealpago = DateTime.Parse(this.txtFechaRealPago.Text).ToString("yyyy/MM/dd");
             this._inscrialu.fechaproximopago = DateTime.Parse(this.txtFechaPago.Text).AddMonths(1).ToString("yyyy/MM/dd");
             this._inscrialu.montocuota = Decimal.Parse(this.txtMontoCuota.Text);
             this._inscrialu.montopagado = Decimal.Parse(this.txtAlumnoPaga.Text);
@@ -82,7 +84,19 @@ namespace ATPCenterGym
                 //Fecha real pago
                 this.dgvHistorialCuotas.Columns[2].Visible = false;
 
-                MessageBox.Show("Acción realizada con exito!!!", "Atención!!!");
+                //se inicio proceso de notificación de envio por mail del pago de cuota
+
+                this.email = new ClassEmail();
+
+                if (this.email.PagoCuota(this.txtEmail.Text, this.txtPunto.Text, this.txtFechaRealPago.Text, this.txtApellido.Text + ", " + this.txtNombre.Text, this.txtTipoClase.Text, this.txtNombreClase.Text, this.txtMontoCuota.Text, this.dgvHistorialCuotas[1, this.dgvHistorialCuotas.CurrentCell.RowIndex].Value.ToString(), this.txtDebePagar.Text, this.txtAlumnoPaga.Text, this.txtMontoSaldo.Text, DateTime.Parse(this.txtFechaPago.Text).AddMonths(1).ToString("dd/MM/yyyy")) == true)
+                {
+                    //se finaliza notificación del envio de mail de pago de cuota
+                    MessageBox.Show("Acción realizada con exito!!!", "Atención!!!");
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo enviar mail a cliente!!!", "Error!!!");
+                }
             }
         }
 
@@ -108,7 +122,7 @@ namespace ATPCenterGym
                 this.txtAlumnoPaga.Text = this.dgvHistorialCuotas[5, this.dgvHistorialCuotas.CurrentCell.RowIndex].Value.ToString();
                 this.txtMontoSaldo.Text = this.dgvHistorialCuotas[6, this.dgvHistorialCuotas.CurrentCell.RowIndex].Value.ToString();
 
-                if (this.txtAlumnoPaga.Text.Length <= 0) this.txtAlumnoPaga.Text = "0.00";
+                if (this.txtAlumnoPaga.Text.Length <= 0) this.txtAlumnoPaga.Text = "0";
 
                 this._deuda = decimal.Parse(this.txtMontoCuota.Text) + decimal.Parse(this.txtMontoSaldo.Text);
                 this.txtDebePagar.Text = this._deuda.ToString();
@@ -116,6 +130,15 @@ namespace ATPCenterGym
                 this._deuda = decimal.Parse(this.txtDebePagar.Text) - decimal.Parse(this.txtAlumnoPaga.Text);
                 this.txtMontoDeuda.Text = this._deuda.ToString();
 
+                if (this.txtFechaRealPago.Text.Length <= 0)
+                {
+                    this.txtFechaRealPago.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                    this.txtFechaRealPago.Enabled = true;
+                }
+                else
+                {
+                    this.txtFechaRealPago.Enabled = false;
+                }
                 this.btnAceptar.Enabled = true;
             }
         }

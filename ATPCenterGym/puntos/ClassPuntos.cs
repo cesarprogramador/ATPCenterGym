@@ -13,6 +13,8 @@ namespace ATPCenter.puntos
         public string bandera { get; set; }
         public string idpunto { get; set; }
         public string nombrepunto { get; set; }
+        public string cel { get; set; }
+        public string tel { get; set; }
         public string calle { get; set; }
         public string numero { get; set; }
         public string piso { get; set; }
@@ -24,9 +26,9 @@ namespace ATPCenter.puntos
         public int idpuntoaccion { get; set; }
         public string sql { get; set; }
 
-        public DataSet ABMPuntos(ClassPuntos _punto, string _tabla)
+        public DataSet ABMPunto(ClassPuntos _punto, string _tabla)
         {
-            sql = "CALL sp_abmpunto(" + _punto.idpunto + ",'" + _punto.nombrepunto + "','" + _punto.calle + "','" + _punto.numero + "','" + _punto.piso + "','" + _punto.dpto + "','" + _punto.accion + "','" + _punto.fechaaccion + "','" + _punto.idempleadoaccion + "','" + _punto.idpuntoaccion + "');";
+            sql = "CALL sp_abmpunto(" + _punto.idpunto + ",'" + _punto.nombrepunto + "','" + _punto.cel + "','" + _punto.tel + "','" + _punto.calle + "','" + _punto.numero + "','" + _punto.piso + "','" + _punto.dpto + "','" + _punto.accion + "','" + _punto.fechaaccion + "','" + _punto.idempleadoaccion + "','" + _punto.idpuntoaccion + "');";
 
             return this.RealizarAccion(sql, _tabla);
         }
@@ -42,11 +44,11 @@ namespace ATPCenter.puntos
             return _resp;
         }
 
-        public DataTable BuscarPuntos(ClassPuntos _punto)
+        public DataSet BuscarPuntos(ClassPuntos _punto, string _tabla)
         {
-            sql = "CALL sp_buscadorpuntos(" + _punto.idpunto + ",'" + _punto.nombrepunto + "',0,100);";
+            sql = "CALL sp_buscadorpuntos(" + _punto.idpunto + ",'" + _punto.nombrepunto + "','" + _punto.calle + "',0,100);";
 
-            return this.RealizarAccion(sql);
+            return this.RealizarAccion(sql, _tabla);
         }
 
         private DataTable RealizarAccion(string _sql)
@@ -58,6 +60,13 @@ namespace ATPCenter.puntos
             _resp = _cnx.AcccionSobreBaseDatos(sql);
 
             return _resp;
+        }
+
+        public DataTable BuscarPuntos(ClassPuntos _punto)
+        {
+            sql = "CALL sp_buscadorpuntos(" + _punto.idpunto + ",'" + _punto.nombrepunto + "','',0,100);";
+
+            return this.RealizarAccion(sql);
         }
     }
 }

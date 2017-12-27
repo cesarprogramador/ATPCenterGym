@@ -43,6 +43,8 @@
             this.aBMProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBMSociosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBmGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aBMPuntosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aBMTipoDeClasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnBusNombreClase = new System.Windows.Forms.Button();
             this.btnBusTipoClase = new System.Windows.Forms.Button();
@@ -76,6 +78,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtTotalCaja = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleCaja)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -92,6 +96,7 @@
             this.dgvDetalleCaja.ReadOnly = true;
             this.dgvDetalleCaja.Size = new System.Drawing.Size(926, 379);
             this.dgvDetalleCaja.TabIndex = 0;
+            this.dgvDetalleCaja.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleCaja_CellDoubleClick);
             // 
             // menuStrip1
             // 
@@ -157,7 +162,9 @@
             this.aBMProfesoresToolStripMenuItem,
             this.aBMProveedoresToolStripMenuItem,
             this.aBMSociosToolStripMenuItem,
-            this.aBmGastosToolStripMenuItem});
+            this.aBmGastosToolStripMenuItem,
+            this.aBMPuntosToolStripMenuItem,
+            this.aBMTipoDeClasesToolStripMenuItem});
             this.aBMToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.aBMToolStripMenuItem.Name = "aBMToolStripMenuItem";
             this.aBMToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
@@ -166,37 +173,51 @@
             // aBMEmpleadosToolStripMenuItem
             // 
             this.aBMEmpleadosToolStripMenuItem.Name = "aBMEmpleadosToolStripMenuItem";
-            this.aBMEmpleadosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.aBMEmpleadosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.aBMEmpleadosToolStripMenuItem.Text = "ABM Empleados";
             this.aBMEmpleadosToolStripMenuItem.Click += new System.EventHandler(this.aBMEmpleadosToolStripMenuItem_Click);
             // 
             // aBMProfesoresToolStripMenuItem
             // 
             this.aBMProfesoresToolStripMenuItem.Name = "aBMProfesoresToolStripMenuItem";
-            this.aBMProfesoresToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.aBMProfesoresToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.aBMProfesoresToolStripMenuItem.Text = "ABM Profesores";
             this.aBMProfesoresToolStripMenuItem.Click += new System.EventHandler(this.aBMProfesoresToolStripMenuItem_Click);
             // 
             // aBMProveedoresToolStripMenuItem
             // 
             this.aBMProveedoresToolStripMenuItem.Name = "aBMProveedoresToolStripMenuItem";
-            this.aBMProveedoresToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.aBMProveedoresToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.aBMProveedoresToolStripMenuItem.Text = "ABM Proveedores";
             this.aBMProveedoresToolStripMenuItem.Click += new System.EventHandler(this.aBMProveedoresToolStripMenuItem_Click);
             // 
             // aBMSociosToolStripMenuItem
             // 
             this.aBMSociosToolStripMenuItem.Name = "aBMSociosToolStripMenuItem";
-            this.aBMSociosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.aBMSociosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.aBMSociosToolStripMenuItem.Text = "ABM Socios";
             this.aBMSociosToolStripMenuItem.Click += new System.EventHandler(this.aBMSociosToolStripMenuItem_Click);
             // 
             // aBmGastosToolStripMenuItem
             // 
             this.aBmGastosToolStripMenuItem.Name = "aBmGastosToolStripMenuItem";
-            this.aBmGastosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.aBmGastosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.aBmGastosToolStripMenuItem.Text = "ABM Gastos";
             this.aBmGastosToolStripMenuItem.Click += new System.EventHandler(this.aBmGastosToolStripMenuItem_Click);
+            // 
+            // aBMPuntosToolStripMenuItem
+            // 
+            this.aBMPuntosToolStripMenuItem.Name = "aBMPuntosToolStripMenuItem";
+            this.aBMPuntosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.aBMPuntosToolStripMenuItem.Text = "ABM Puntos";
+            this.aBMPuntosToolStripMenuItem.Click += new System.EventHandler(this.aBMPuntosToolStripMenuItem_Click);
+            // 
+            // aBMTipoDeClasesToolStripMenuItem
+            // 
+            this.aBMTipoDeClasesToolStripMenuItem.Name = "aBMTipoDeClasesToolStripMenuItem";
+            this.aBMTipoDeClasesToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.aBMTipoDeClasesToolStripMenuItem.Text = "ABM Tipo de clases";
+            this.aBMTipoDeClasesToolStripMenuItem.Click += new System.EventHandler(this.aBMTipoDeClasesToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
@@ -531,12 +552,33 @@
             this.label13.TabIndex = 62;
             this.label13.Text = "Monto Total en Caja $:";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Orange;
+            this.panel1.Location = new System.Drawing.Point(17, 623);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(25, 27);
+            this.panel1.TabIndex = 64;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(45, 629);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(234, 16);
+            this.label14.TabIndex = 65;
+            this.label14.Text = "Apto médico vencido o no lo presento";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(946, 713);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtTotalCaja);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.txtTotalEgreso);
@@ -634,5 +676,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtTotalCaja;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ToolStripMenuItem aBMPuntosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aBMTipoDeClasesToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label14;
     }
 }

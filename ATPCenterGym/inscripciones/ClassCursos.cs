@@ -40,7 +40,7 @@ namespace ATPCenter.tiposdeclase
 
             return this.RealizarAccion(sql);
         }
-
+        
         public DataTable BuscarTiposDeClases(ClassCursos _curso)
         {
             sql = "CALL sp_buscadortiposdeclasesporpunto(" + _curso.idpunto + ",0,100);";

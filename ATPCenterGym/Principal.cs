@@ -1,6 +1,7 @@
 ﻿using ATPCenter.cajadeldia;
 using ATPCenter.personas;
 using ATPCenter.tiposdeclase;
+using ATPCenter.tiposdeclases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,7 @@ namespace ATPCenterGym
         ClassPersonas _loginper;
         ClassCursos _cursos;
         ClassCajaDelDia _caja;
+        ClassTiposDeClases _clases;
         StreamWriter arch;
         string ruta = "";
 
@@ -80,11 +82,25 @@ namespace ATPCenterGym
             this._cursos = new ClassCursos();
             this._cursos.idpunto = "0";
             this._cursos.tipodeclase = "";
-
+            /*
             this.cbBusTipoClase.DataSource = this._cursos.BuscarTiposDeClases(this._cursos);
             this.cbBusTipoClase.ValueMember = "idtipodeclase";
             this.cbBusTipoClase.DisplayMember = "tipodeclase";
             this.cbBusTipoClase.Text = "";
+            */
+            this._clases = new ClassTiposDeClases();
+
+            this._clases.idclase = "0";
+            this._clases.idtipodeclase = "0";
+            this._clases.nombreclase = "";
+
+            DataTable _todasclases = this._clases.BuscarTiposDeClases(this._clases);
+
+            this.cbBusTipoClase.DataSource = _todasclases;
+            this.cbBusTipoClase.ValueMember = "idtipodeclase";
+            this.cbBusTipoClase.DisplayMember = "tipodeclase";
+            this.cbBusTipoClase.SelectedValue = 1;
+
 
             this.cbBusNombreClase.Enabled = false;
         }
@@ -222,18 +238,58 @@ namespace ATPCenterGym
 
             if (this.dgvDetalleCaja.Rows.Count > 0)
             {
-                if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas") 
+                if (this.cbBusTipoOperaciones.Text == "Cuotas Impagas")
                 {
                     this.dgvDetalleCaja.Columns[0].Visible = false;
                     this.dgvDetalleCaja.Columns[9].Visible = false;
+                    this.dgvDetalleCaja.Columns[10].Visible = false;
                 }
                 else
                 {
-                    this.dgvDetalleCaja.Columns[0].Visible = false;
-                    this.dgvDetalleCaja.Columns[8].Visible = false;
-                    this.dgvDetalleCaja.Columns[9].Visible = false;
+                    if ((this.cbBusTipoOperaciones.Text == "Ingresos") ||(this.cbBusTipoOperaciones.Text == "Caja del día"))
+                    {
+                        this.dgvDetalleCaja.Columns[0].Visible = false;
+                        this.dgvDetalleCaja.Columns[8].Visible = false;
+                        this.dgvDetalleCaja.Columns[9].Visible = false;
+                        this.dgvDetalleCaja.Columns[10].Visible = false;
+                    }
+                    else
+                    {
+                        this.dgvDetalleCaja.Columns[0].Visible = false;
+                        this.dgvDetalleCaja.Columns[8].Visible = false;
+                        this.dgvDetalleCaja.Columns[9].Visible = false;
+                    }
                 }
+
                 this.ObtenerTotales();
+
+                if (this.cbBusTipoOperaciones.Text != "Egresos") this.VencidoActoMedico();
+            }
+            else 
+            {
+                this.dgvDetalleCaja.DataSource = null;
+            }
+        }
+
+        private void VencidoActoMedico()
+        {
+            DateTime fecha;
+
+            for (int i = 0; i < this.dgvDetalleCaja.Rows.Count; i++)
+            {
+                if (this.dgvDetalleCaja[10, i].Value.ToString().Length > 0)
+                {
+                    fecha = DateTime.Parse(this.dgvDetalleCaja[10, i].Value.ToString());
+
+                    if (fecha <= DateTime.Now)
+                    {
+                        this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = Color.Orange;
+                    }
+                }
+                else 
+                {
+                    this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = Color.Orange;
+                }
             }
         }
 
@@ -270,9 +326,9 @@ namespace ATPCenterGym
             {
                 case "Caja del día":
                     this.txtBusFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                    this.txtBusFechaIni.Enabled = false;
+                   // this.txtBusFechaIni.Enabled = false;
                     this.txtBusFechaFin.Text = this.txtBusFechaIni.Text;
-                    this.txtBusFechaFin.Enabled = false;
+                   // this.txtBusFechaFin.Enabled = false;
 
                     this.txtBusApellido.Text = "";
                     this.txtBusApellido.Enabled = true;
@@ -301,9 +357,9 @@ namespace ATPCenterGym
                     break;
                 case "Ingresos":
                     this.txtBusFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                    this.txtBusFechaIni.Enabled = true;
+                   // this.txtBusFechaIni.Enabled = true;
                     this.txtBusFechaFin.Text = this.txtBusFechaIni.Text;
-                    this.txtBusFechaFin.Enabled = true;
+                   // this.txtBusFechaFin.Enabled = true;
                     
                     this.txtBusApellido.Text = "";
                     this.txtBusApellido.Enabled = true;
@@ -331,9 +387,9 @@ namespace ATPCenterGym
                     break;
                 case "Egresos":
                     this.txtBusFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                    this.txtBusFechaIni.Enabled = true;
+                   // this.txtBusFechaIni.Enabled = true;
                     this.txtBusFechaFin.Text = this.txtBusFechaIni.Text;
-                    this.txtBusFechaFin.Enabled = true;
+                   // this.txtBusFechaFin.Enabled = true;
                     
                     this.txtBusApellido.Text = "";
                     this.txtBusApellido.Enabled = true;
@@ -361,6 +417,39 @@ namespace ATPCenterGym
                     this.btnBusNombreClase.Enabled = false;
                     this.cbBusNombreClase.DataSource = null;
                     this.cbBusNombreClase.Enabled = false;
+                    break;
+                case "Cuotas Impagas":
+                    DateTime ffutura = DateTime.Now.AddMonths(1);
+
+                    this.txtBusFechaIni.Text =new DateTime(ffutura.Year,ffutura.Month,1).ToString("dd/MM/yyyy");
+                   // this.txtBusFechaIni.Enabled = true;
+                    this.txtBusFechaFin.Text = new DateTime(ffutura.Year, ffutura.Month, DateTime.DaysInMonth(ffutura.Year, ffutura.Month)).ToString("dd/MM/yyyy");
+                   // this.txtBusFechaFin.Enabled = true;
+
+                    this.txtBusApellido.Text = "";
+                    this.txtBusApellido.Enabled = true;
+
+                    this.txtBusNombre.Text = "";
+                    this.txtBusNombre.Enabled = true;
+
+                    this.txtBusDetalleMovimiento.Text = "";
+                    this.txtBusDetalleMovimiento.Enabled = true;
+
+                    this.cbBusTipoPersona.Text = "Todos";
+                    this.cbBusTipoPersona.Enabled = false;
+
+                    this.cbBusPuntos.Text = "";
+                    this.cbBusPuntos.Enabled = true;
+                    this._cursos.idpunto = "0";
+
+                    this.cbBusTipoClase.Text = "";
+                    this.cbBusTipoClase.Enabled = true;
+                    this.btnBusTipoClase.Enabled = true;
+
+                    this.cbBusNombreClase.Text = "";
+                    this.cbBusNombreClase.DataSource = null;
+                    this.cbBusNombreClase.Enabled = true;
+                    this.btnBusNombreClase.Enabled = true;
                     break;
             }
         }
@@ -532,6 +621,36 @@ namespace ATPCenterGym
             {
                 MessageBox.Show(err.ToString());
             }
+        }
+
+        private void dgvDetalleCaja_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvDetalleCaja.Rows.Count > 0 && this.cbBusTipoOperaciones.Text == "Cuotas Impagas")
+            {
+                try
+                {
+                    ABMCuotas _cuotas = new ABMCuotas();
+
+                    _cuotas._idcurso = this.dgvDetalleCaja[9, this.dgvDetalleCaja.CurrentCell.RowIndex].Value.ToString();
+                    _cuotas.ShowDialog();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Tiene que seleccionar una mora curso sobre el cual se cobrar la cuota al alumno!!!", "Falta");
+                }
+            }
+        }
+
+        private void aBMPuntosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ABMPuntos formpunto = new ABMPuntos();
+            formpunto.Show();
+        }
+
+        private void aBMTipoDeClasesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ABMClases fromclase = new ABMClases();
+            fromclase.Show();
         }
     }
 }

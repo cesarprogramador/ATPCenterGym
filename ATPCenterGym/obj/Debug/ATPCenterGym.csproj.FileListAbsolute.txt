@@ -15,3 +15,8 @@ D:\FENIX\Documents\Visual Studio 2012\Projects\ATPCenterGym\ATPCenterGym\obj\Deb
 D:\FENIX\Documents\Visual Studio 2012\Projects\ATPCenterGym\ATPCenterGym\obj\Debug\ATPCenterGym.exe
 D:\FENIX\Documents\Visual Studio 2012\Projects\ATPCenterGym\ATPCenterGym\obj\Debug\ATPCenterGym.pdb
 D:\FENIX\Documents\Visual Studio 2012\Projects\ATPCenterGym\ATPCenterGym\obj\Debug\ATPCenterGym.csprojResolveAssemblyReference.cache
+F:\ATPCenterGym\ATPCenterGym\bin\Debug\ATPCenterGym.exe.config
+F:\ATPCenterGym\ATPCenterGym\obj\Debug\ATPCenterGym.exe
+F:\ATPCenterGym\ATPCenterGym\obj\Debug\ATPCenterGym.pdb
+D:\FENIX\Documents\Visual Studio 2012\Projects\ATPCenterGym\ATPCenterGym\obj\Debug\ATPCenterGym.ABMPuntos.resources
+D:\FENIX\Documents\Visual Studio 2012\Projects\ATPCenterGym\ATPCenterGym\obj\Debug\ATPCenterGym.ABMClases.resources

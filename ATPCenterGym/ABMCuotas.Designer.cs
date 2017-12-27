@@ -407,7 +407,6 @@
             // 
             // txtFechaRealPago
             // 
-            this.txtFechaRealPago.Enabled = false;
             this.txtFechaRealPago.Location = new System.Drawing.Point(106, 59);
             this.txtFechaRealPago.Name = "txtFechaRealPago";
             this.txtFechaRealPago.Size = new System.Drawing.Size(133, 20);
@@ -416,7 +415,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 63);
+            this.label10.Location = new System.Drawing.Point(20, 35);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(84, 13);
             this.label10.TabIndex = 4;
@@ -432,7 +431,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(20, 34);
+            this.label9.Location = new System.Drawing.Point(19, 63);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(85, 13);
             this.label9.TabIndex = 2;

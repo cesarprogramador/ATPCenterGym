@@ -162,7 +162,10 @@ namespace ATPCenterGym
             this._profesores.fechaaccion = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
             this._profesores.idempleadoaccion = 1; //Viene del login
             this._profesores.idpuntoaccion = 1; //Viene del login
-
+            this._profesores.aptomedico = "NO";
+            this._profesores.fechainicertificado = null;
+            this._profesores.fechafincertificado = null;
+            
             this.dgvProfesores.DataSource = this._profesores.ABMPersona(this._profesores, "accion");
             this.dgvProfesores.DataMember = "accion";
 

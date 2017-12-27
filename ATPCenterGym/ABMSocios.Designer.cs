@@ -39,6 +39,8 @@
             this.txtCuil = new System.Windows.Forms.TextBox();
             this.gbxBuscador = new System.Windows.Forms.GroupBox();
             this.dgvSocios = new System.Windows.Forms.DataGridView();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.cbBusPuntos = new System.Windows.Forms.ComboBox();
             this.txtBusDni = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -55,7 +57,18 @@
             this.txtCalle = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.gbxDetalle = new System.Windows.Forms.GroupBox();
+            this.txtFechaFin = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtFechaIni = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbAptoMedico = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.gbxDetalleCursos = new System.Windows.Forms.GroupBox();
+            this.dgvCursos = new System.Windows.Forms.DataGridView();
+            this.btnEliminarInsc = new System.Windows.Forms.Button();
+            this.btnModificarInsc = new System.Windows.Forms.Button();
+            this.btnNuevoInsc = new System.Windows.Forms.Button();
+            this.pbxFoto = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtDni = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -68,29 +81,24 @@
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.gbxAcciones = new System.Windows.Forms.GroupBox();
-            this.gbxConfirmarAccion = new System.Windows.Forms.GroupBox();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnEliminarInsc = new System.Windows.Forms.Button();
-            this.btnModificarInsc = new System.Windows.Forms.Button();
-            this.btnNuevoInsc = new System.Windows.Forms.Button();
-            this.pbxFoto = new System.Windows.Forms.PictureBox();
             this.btnPagarCuota = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.gbxConfirmarAccion = new System.Windows.Forms.GroupBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.dgvCursos = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
             this.gbxBuscador.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSocios)).BeginInit();
             this.gbxDetalle.SuspendLayout();
             this.gbxDetalleCursos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).BeginInit();
             this.gbxAcciones.SuspendLayout();
             this.gbxConfirmarAccion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).BeginInit();
             this.SuspendLayout();
             // 
             // label5
@@ -106,7 +114,7 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(90, 208);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(191, 20);
+            this.txtEmail.Size = new System.Drawing.Size(245, 20);
             this.txtEmail.TabIndex = 19;
             // 
             // label15
@@ -122,7 +130,7 @@
             // 
             this.txtTel.Location = new System.Drawing.Point(90, 182);
             this.txtTel.Name = "txtTel";
-            this.txtTel.Size = new System.Drawing.Size(191, 20);
+            this.txtTel.Size = new System.Drawing.Size(245, 20);
             this.txtTel.TabIndex = 17;
             // 
             // label16
@@ -138,7 +146,7 @@
             // 
             this.txtCel.Location = new System.Drawing.Point(90, 156);
             this.txtCel.Name = "txtCel";
-            this.txtCel.Size = new System.Drawing.Size(191, 20);
+            this.txtCel.Size = new System.Drawing.Size(245, 20);
             this.txtCel.TabIndex = 15;
             // 
             // label11
@@ -154,11 +162,13 @@
             // 
             this.txtCuil.Location = new System.Drawing.Point(90, 130);
             this.txtCuil.Name = "txtCuil";
-            this.txtCuil.Size = new System.Drawing.Size(191, 20);
+            this.txtCuil.Size = new System.Drawing.Size(245, 20);
             this.txtCuil.TabIndex = 13;
             // 
             // gbxBuscador
             // 
+            this.gbxBuscador.Controls.Add(this.label22);
+            this.gbxBuscador.Controls.Add(this.panel1);
             this.gbxBuscador.Controls.Add(this.dgvSocios);
             this.gbxBuscador.Controls.Add(this.btnLimpiar);
             this.gbxBuscador.Controls.Add(this.btnBuscar);
@@ -186,9 +196,37 @@
             this.dgvSocios.Location = new System.Drawing.Point(14, 182);
             this.dgvSocios.Name = "dgvSocios";
             this.dgvSocios.ReadOnly = true;
-            this.dgvSocios.Size = new System.Drawing.Size(267, 416);
+            this.dgvSocios.Size = new System.Drawing.Size(267, 389);
             this.dgvSocios.TabIndex = 12;
             this.dgvSocios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSocios_CellClick);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackgroundImage = global::ATPCenterGym.Properties.Resources.Refresh;
+            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnLimpiar.Location = new System.Drawing.Point(169, 128);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(86, 42);
+            this.btnLimpiar.TabIndex = 11;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLimpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackgroundImage = global::ATPCenterGym.Properties.Resources.Search;
+            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBuscar.Location = new System.Drawing.Point(51, 128);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(86, 42);
+            this.btnBuscar.TabIndex = 10;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // cbBusPuntos
             // 
@@ -248,15 +286,15 @@
             // 
             // txtDpto
             // 
-            this.txtDpto.Location = new System.Drawing.Point(399, 230);
+            this.txtDpto.Location = new System.Drawing.Point(290, 260);
             this.txtDpto.Name = "txtDpto";
-            this.txtDpto.Size = new System.Drawing.Size(191, 20);
+            this.txtDpto.Size = new System.Drawing.Size(45, 20);
             this.txtDpto.TabIndex = 27;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(349, 234);
+            this.label18.Location = new System.Drawing.Point(240, 264);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(48, 13);
             this.label18.TabIndex = 26;
@@ -264,15 +302,15 @@
             // 
             // txtPiso
             // 
-            this.txtPiso.Location = new System.Drawing.Point(399, 204);
+            this.txtPiso.Location = new System.Drawing.Point(186, 261);
             this.txtPiso.Name = "txtPiso";
-            this.txtPiso.Size = new System.Drawing.Size(191, 20);
+            this.txtPiso.Size = new System.Drawing.Size(43, 20);
             this.txtPiso.TabIndex = 25;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(367, 208);
+            this.label19.Location = new System.Drawing.Point(154, 265);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(30, 13);
             this.label19.TabIndex = 24;
@@ -282,7 +320,7 @@
             // 
             this.txtNumero.Location = new System.Drawing.Point(90, 260);
             this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(191, 20);
+            this.txtNumero.Size = new System.Drawing.Size(54, 20);
             this.txtNumero.TabIndex = 23;
             // 
             // label17
@@ -298,7 +336,7 @@
             // 
             this.txtCalle.Location = new System.Drawing.Point(90, 234);
             this.txtCalle.Name = "txtCalle";
-            this.txtCalle.Size = new System.Drawing.Size(191, 20);
+            this.txtCalle.Size = new System.Drawing.Size(245, 20);
             this.txtCalle.TabIndex = 21;
             // 
             // label14
@@ -312,6 +350,12 @@
             // 
             // gbxDetalle
             // 
+            this.gbxDetalle.Controls.Add(this.txtFechaFin);
+            this.gbxDetalle.Controls.Add(this.label4);
+            this.gbxDetalle.Controls.Add(this.txtFechaIni);
+            this.gbxDetalle.Controls.Add(this.label7);
+            this.gbxDetalle.Controls.Add(this.cbAptoMedico);
+            this.gbxDetalle.Controls.Add(this.label20);
             this.gbxDetalle.Controls.Add(this.gbxDetalleCursos);
             this.gbxDetalle.Controls.Add(this.pbxFoto);
             this.gbxDetalle.Controls.Add(this.txtDpto);
@@ -342,10 +386,65 @@
             this.gbxDetalle.Controls.Add(this.label10);
             this.gbxDetalle.Location = new System.Drawing.Point(315, 12);
             this.gbxDetalle.Name = "gbxDetalle";
-            this.gbxDetalle.Size = new System.Drawing.Size(627, 525);
+            this.gbxDetalle.Size = new System.Drawing.Size(617, 525);
             this.gbxDetalle.TabIndex = 9;
             this.gbxDetalle.TabStop = false;
             this.gbxDetalle.Text = "Detalle Empleado Seleccionado";
+            // 
+            // txtFechaFin
+            // 
+            this.txtFechaFin.Location = new System.Drawing.Point(437, 234);
+            this.txtFechaFin.Name = "txtFechaFin";
+            this.txtFechaFin.Size = new System.Drawing.Size(163, 20);
+            this.txtFechaFin.TabIndex = 36;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(342, 237);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 13);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "Vence certificado:";
+            // 
+            // txtFechaIni
+            // 
+            this.txtFechaIni.Location = new System.Drawing.Point(437, 205);
+            this.txtFechaIni.Name = "txtFechaIni";
+            this.txtFechaIni.Size = new System.Drawing.Size(163, 20);
+            this.txtFechaIni.TabIndex = 34;
+            this.txtFechaIni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFechaIni_KeyPress);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(344, 208);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(92, 13);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Fecha certificado:";
+            // 
+            // cbAptoMedico
+            // 
+            this.cbAptoMedico.FormattingEnabled = true;
+            this.cbAptoMedico.Items.AddRange(new object[] {
+            "SI",
+            "NO"});
+            this.cbAptoMedico.Location = new System.Drawing.Point(437, 178);
+            this.cbAptoMedico.Name = "cbAptoMedico";
+            this.cbAptoMedico.Size = new System.Drawing.Size(163, 21);
+            this.cbAptoMedico.TabIndex = 32;
+            this.cbAptoMedico.Text = "NO";
+            this.cbAptoMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbAptoMedico_KeyPress);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(367, 182);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(69, 13);
+            this.label20.TabIndex = 31;
+            this.label20.Text = "Apto médico:";
             // 
             // gbxDetalleCursos
             // 
@@ -353,12 +452,75 @@
             this.gbxDetalleCursos.Controls.Add(this.btnEliminarInsc);
             this.gbxDetalleCursos.Controls.Add(this.btnModificarInsc);
             this.gbxDetalleCursos.Controls.Add(this.btnNuevoInsc);
-            this.gbxDetalleCursos.Location = new System.Drawing.Point(31, 290);
+            this.gbxDetalleCursos.Location = new System.Drawing.Point(21, 287);
             this.gbxDetalleCursos.Name = "gbxDetalleCursos";
-            this.gbxDetalleCursos.Size = new System.Drawing.Size(559, 217);
+            this.gbxDetalleCursos.Size = new System.Drawing.Size(579, 219);
             this.gbxDetalleCursos.TabIndex = 30;
             this.gbxDetalleCursos.TabStop = false;
             this.gbxDetalleCursos.Text = "Inscripciones  a Cursos";
+            // 
+            // dgvCursos
+            // 
+            this.dgvCursos.AllowUserToAddRows = false;
+            this.dgvCursos.AllowUserToDeleteRows = false;
+            this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCursos.Location = new System.Drawing.Point(13, 19);
+            this.dgvCursos.Name = "dgvCursos";
+            this.dgvCursos.ReadOnly = true;
+            this.dgvCursos.Size = new System.Drawing.Size(503, 182);
+            this.dgvCursos.TabIndex = 17;
+            this.dgvCursos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCursos_CellClick);
+            // 
+            // btnEliminarInsc
+            // 
+            this.btnEliminarInsc.BackgroundImage = global::ATPCenterGym.Properties.Resources.Delete;
+            this.btnEliminarInsc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnEliminarInsc.Location = new System.Drawing.Point(525, 146);
+            this.btnEliminarInsc.Name = "btnEliminarInsc";
+            this.btnEliminarInsc.Size = new System.Drawing.Size(41, 40);
+            this.btnEliminarInsc.TabIndex = 16;
+            this.btnEliminarInsc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEliminarInsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEliminarInsc.UseVisualStyleBackColor = true;
+            this.btnEliminarInsc.Click += new System.EventHandler(this.btnEliminarInsc_Click);
+            // 
+            // btnModificarInsc
+            // 
+            this.btnModificarInsc.BackgroundImage = global::ATPCenterGym.Properties.Resources.Edit;
+            this.btnModificarInsc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnModificarInsc.Location = new System.Drawing.Point(525, 90);
+            this.btnModificarInsc.Name = "btnModificarInsc";
+            this.btnModificarInsc.Size = new System.Drawing.Size(41, 40);
+            this.btnModificarInsc.TabIndex = 15;
+            this.btnModificarInsc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnModificarInsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnModificarInsc.UseVisualStyleBackColor = true;
+            this.btnModificarInsc.Click += new System.EventHandler(this.btnModificarInsc_Click);
+            // 
+            // btnNuevoInsc
+            // 
+            this.btnNuevoInsc.BackgroundImage = global::ATPCenterGym.Properties.Resources.Add;
+            this.btnNuevoInsc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnNuevoInsc.Location = new System.Drawing.Point(525, 34);
+            this.btnNuevoInsc.Name = "btnNuevoInsc";
+            this.btnNuevoInsc.Size = new System.Drawing.Size(41, 40);
+            this.btnNuevoInsc.TabIndex = 14;
+            this.btnNuevoInsc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNuevoInsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnNuevoInsc.UseVisualStyleBackColor = true;
+            this.btnNuevoInsc.Click += new System.EventHandler(this.btnNuevoInsc_Click);
+            // 
+            // pbxFoto
+            // 
+            this.pbxFoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbxFoto.Image = ((System.Drawing.Image)(resources.GetObject("pbxFoto.Image")));
+            this.pbxFoto.Location = new System.Drawing.Point(410, 15);
+            this.pbxFoto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pbxFoto.Name = "pbxFoto";
+            this.pbxFoto.Size = new System.Drawing.Size(156, 155);
+            this.pbxFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxFoto.TabIndex = 29;
+            this.pbxFoto.TabStop = false;
             // 
             // label12
             // 
@@ -373,7 +535,7 @@
             // 
             this.txtDni.Location = new System.Drawing.Point(90, 104);
             this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new System.Drawing.Size(191, 20);
+            this.txtDni.Size = new System.Drawing.Size(245, 20);
             this.txtDni.TabIndex = 11;
             // 
             // label13
@@ -388,15 +550,15 @@
             // cbPuntos
             // 
             this.cbPuntos.FormattingEnabled = true;
-            this.cbPuntos.Location = new System.Drawing.Point(399, 256);
+            this.cbPuntos.Location = new System.Drawing.Point(437, 260);
             this.cbPuntos.Name = "cbPuntos";
-            this.cbPuntos.Size = new System.Drawing.Size(191, 21);
+            this.cbPuntos.Size = new System.Drawing.Size(163, 21);
             this.cbPuntos.TabIndex = 9;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(359, 261);
+            this.label6.Location = new System.Drawing.Point(397, 265);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(38, 13);
             this.label6.TabIndex = 8;
@@ -406,7 +568,7 @@
             // 
             this.txtFechaNac.Location = new System.Drawing.Point(90, 78);
             this.txtFechaNac.Name = "txtFechaNac";
-            this.txtFechaNac.Size = new System.Drawing.Size(191, 20);
+            this.txtFechaNac.Size = new System.Drawing.Size(245, 20);
             this.txtFechaNac.TabIndex = 5;
             // 
             // label8
@@ -422,7 +584,7 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(90, 52);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(191, 20);
+            this.txtNombre.Size = new System.Drawing.Size(245, 20);
             this.txtNombre.TabIndex = 3;
             // 
             // label9
@@ -438,7 +600,7 @@
             // 
             this.txtApellido.Location = new System.Drawing.Point(90, 26);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(191, 20);
+            this.txtApellido.Size = new System.Drawing.Size(245, 20);
             this.txtApellido.TabIndex = 1;
             // 
             // label10
@@ -463,95 +625,6 @@
             this.gbxAcciones.TabIndex = 10;
             this.gbxAcciones.TabStop = false;
             this.gbxAcciones.Text = "Acciones";
-            // 
-            // gbxConfirmarAccion
-            // 
-            this.gbxConfirmarAccion.Controls.Add(this.btnCancelar);
-            this.gbxConfirmarAccion.Controls.Add(this.btnAceptar);
-            this.gbxConfirmarAccion.Location = new System.Drawing.Point(315, 543);
-            this.gbxConfirmarAccion.Name = "gbxConfirmarAccion";
-            this.gbxConfirmarAccion.Size = new System.Drawing.Size(627, 83);
-            this.gbxConfirmarAccion.TabIndex = 11;
-            this.gbxConfirmarAccion.TabStop = false;
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.BackgroundImage = global::ATPCenterGym.Properties.Resources.Refresh;
-            this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnLimpiar.Location = new System.Drawing.Point(169, 128);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(86, 42);
-            this.btnLimpiar.TabIndex = 11;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.BackgroundImage = global::ATPCenterGym.Properties.Resources.Search;
-            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnBuscar.Location = new System.Drawing.Point(51, 128);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(86, 42);
-            this.btnBuscar.TabIndex = 10;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnEliminarInsc
-            // 
-            this.btnEliminarInsc.BackgroundImage = global::ATPCenterGym.Properties.Resources.Delete;
-            this.btnEliminarInsc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnEliminarInsc.Location = new System.Drawing.Point(512, 148);
-            this.btnEliminarInsc.Name = "btnEliminarInsc";
-            this.btnEliminarInsc.Size = new System.Drawing.Size(41, 40);
-            this.btnEliminarInsc.TabIndex = 16;
-            this.btnEliminarInsc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEliminarInsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnEliminarInsc.UseVisualStyleBackColor = true;
-            this.btnEliminarInsc.Click += new System.EventHandler(this.btnEliminarInsc_Click);
-            // 
-            // btnModificarInsc
-            // 
-            this.btnModificarInsc.BackgroundImage = global::ATPCenterGym.Properties.Resources.Edit;
-            this.btnModificarInsc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnModificarInsc.Location = new System.Drawing.Point(512, 87);
-            this.btnModificarInsc.Name = "btnModificarInsc";
-            this.btnModificarInsc.Size = new System.Drawing.Size(41, 40);
-            this.btnModificarInsc.TabIndex = 15;
-            this.btnModificarInsc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnModificarInsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnModificarInsc.UseVisualStyleBackColor = true;
-            this.btnModificarInsc.Click += new System.EventHandler(this.btnModificarInsc_Click);
-            // 
-            // btnNuevoInsc
-            // 
-            this.btnNuevoInsc.BackgroundImage = global::ATPCenterGym.Properties.Resources.Add;
-            this.btnNuevoInsc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnNuevoInsc.Location = new System.Drawing.Point(512, 28);
-            this.btnNuevoInsc.Name = "btnNuevoInsc";
-            this.btnNuevoInsc.Size = new System.Drawing.Size(41, 40);
-            this.btnNuevoInsc.TabIndex = 14;
-            this.btnNuevoInsc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNuevoInsc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNuevoInsc.UseVisualStyleBackColor = true;
-            this.btnNuevoInsc.Click += new System.EventHandler(this.btnNuevoInsc_Click);
-            // 
-            // pbxFoto
-            // 
-            this.pbxFoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbxFoto.Image = ((System.Drawing.Image)(resources.GetObject("pbxFoto.Image")));
-            this.pbxFoto.Location = new System.Drawing.Point(412, 26);
-            this.pbxFoto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pbxFoto.Name = "pbxFoto";
-            this.pbxFoto.Size = new System.Drawing.Size(164, 157);
-            this.pbxFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxFoto.TabIndex = 29;
-            this.pbxFoto.TabStop = false;
             // 
             // btnPagarCuota
             // 
@@ -623,6 +696,16 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // gbxConfirmarAccion
+            // 
+            this.gbxConfirmarAccion.Controls.Add(this.btnCancelar);
+            this.gbxConfirmarAccion.Controls.Add(this.btnAceptar);
+            this.gbxConfirmarAccion.Location = new System.Drawing.Point(315, 543);
+            this.gbxConfirmarAccion.Name = "gbxConfirmarAccion";
+            this.gbxConfirmarAccion.Size = new System.Drawing.Size(627, 83);
+            this.gbxConfirmarAccion.TabIndex = 11;
+            this.gbxConfirmarAccion.TabStop = false;
+            // 
             // btnCancelar
             // 
             this.btnCancelar.BackgroundImage = global::ATPCenterGym.Properties.Resources.Undo;
@@ -651,17 +734,23 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // dgvCursos
+            // panel1
             // 
-            this.dgvCursos.AllowUserToAddRows = false;
-            this.dgvCursos.AllowUserToDeleteRows = false;
-            this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCursos.Location = new System.Drawing.Point(15, 23);
-            this.dgvCursos.Name = "dgvCursos";
-            this.dgvCursos.ReadOnly = true;
-            this.dgvCursos.Size = new System.Drawing.Size(486, 176);
-            this.dgvCursos.TabIndex = 17;
-            this.dgvCursos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCursos_CellClick);
+            this.panel1.BackColor = System.Drawing.Color.Orange;
+            this.panel1.Location = new System.Drawing.Point(14, 581);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(25, 27);
+            this.panel1.TabIndex = 66;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(41, 587);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(234, 16);
+            this.label22.TabIndex = 68;
+            this.label22.Text = "Apto médico vencido o no lo presento";
             // 
             // ABMSocios
             // 
@@ -684,10 +773,10 @@
             this.gbxDetalle.ResumeLayout(false);
             this.gbxDetalle.PerformLayout();
             this.gbxDetalleCursos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).EndInit();
             this.gbxAcciones.ResumeLayout(false);
             this.gbxConfirmarAccion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -748,5 +837,13 @@
         private System.Windows.Forms.Button btnNuevoInsc;
         private System.Windows.Forms.Button btnPagarCuota;
         private System.Windows.Forms.DataGridView dgvCursos;
+        private System.Windows.Forms.TextBox txtFechaFin;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtFechaIni;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbAptoMedico;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Panel panel1;
     }
 }

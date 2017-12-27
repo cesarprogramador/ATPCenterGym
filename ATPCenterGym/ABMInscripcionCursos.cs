@@ -1,4 +1,5 @@
 ﻿using ATPCenter.tiposdeclase;
+using ATPCenter.tiposdeclases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,8 @@ namespace ATPCenterGym
         public string _bandera = "";
         ClassCursos _cursos;
         DataSet _resp;
-       
+        ClassTiposDeClases _clases;
+        
         public ABMInscripcionCursos()
         {
             InitializeComponent();
@@ -38,9 +40,23 @@ namespace ATPCenterGym
                 this._cursos.idtipodeclase = "0";
                 this._cursos.tipodeclase = "";
                 this._cursos.idpunto = this._idpunto;
-                this.cbTipoClase.DataSource = this._cursos.BuscarTiposDeClases(this._cursos);
+              
+                this._clases = new ClassTiposDeClases();
+
+                this._clases.idclase = "0";
+                this._clases.idtipodeclase = "1";
+                this._clases.nombreclase = "";
+
+                DataTable _todasclases = this._clases.BuscarTiposDeClases(this._clases);
+
+                //Agrupar o borrar las filas repetidas de la lista que se recupera de la consulta
+                _todasclases = this._clases.EliminarFilasDuplicadas(_todasclases, "tipodeclase");
+
+                //Muestra datos en el combo
+                this.cbTipoClase.DataSource = _todasclases;
                 this.cbTipoClase.ValueMember = "idtipodeclase";
                 this.cbTipoClase.DisplayMember = "tipodeclase";
+              
                 this.txtFechaPago.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
                 if ((this._bandera == "M") || (this._bandera == "B"))

@@ -37,7 +37,35 @@ namespace ATPCenterGym
             this.dgvSocios.DataSource = this._socios.BuscarPersonaSocios(this._socios, "Socios");
             this.dgvSocios.DataMember = "Socios";
 
-            if (this.dgvSocios.Rows.Count > 0) this.dgvSocios.Columns[0].Visible = false;
+            if (this.dgvSocios.Rows.Count > 0)
+            {
+                this.dgvSocios.Columns[0].Visible = false;
+               // this.dgvSocios.Columns[4].Visible = false;
+
+                this.VencidoActoMedico();
+            }
+        }
+
+        private void VencidoActoMedico()
+        {
+            DateTime fecha;
+
+            for (int i = 0; i < this.dgvSocios.Rows.Count; i++)
+            {
+                if (this.dgvSocios[4, i].Value.ToString().Length > 0)
+                {
+                    fecha = DateTime.Parse(this.dgvSocios[4, i].Value.ToString());
+
+                    if (fecha <= DateTime.Now)
+                    {
+                        this.dgvSocios.Rows[i].DefaultCellStyle.BackColor = Color.Orange;
+                    }
+                }
+                else
+                {
+                    this.dgvSocios.Rows[i].DefaultCellStyle.BackColor = Color.Orange;
+                }
+            }
         }
 
         private void ABMSocios_Load(object sender, EventArgs e)
@@ -115,13 +143,24 @@ namespace ATPCenterGym
             this._socios.dpto = this.txtDpto.Text;
             this._socios.punto = this.cbPuntos.Text;
             this._socios.tipopersona = "Socio";
-            //  this._socios.especialidad = this.cbEspecialidad.Text;
+            this._socios.idespecialidad = "1";
             this._socios.urlfoto = "...";
             this._socios.accion = this.bandera;
             this._socios.fechaaccion = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
             this._socios.idempleadoaccion = 1; //Viene del login
             this._socios.idpuntoaccion = 1; //Viene del login
-            this._socios.idespecialidad = "1";
+            this._socios.aptomedico = this.cbAptoMedico.Text;
+            
+            if (this.cbAptoMedico.Text == "NO")
+            {
+                this._socios.fechainicertificado = null;
+                this._socios.fechafincertificado = null;
+            }
+            else
+            {
+                this._socios.fechainicertificado = DateTime.Parse(this.txtFechaIni.Text).ToString("yyyy/MM/dd");
+                this._socios.fechafincertificado = DateTime.Parse(this.txtFechaFin.Text).ToString("yyyy/MM/dd");
+            }
 
             this.dgvSocios.DataSource = this._socios.ABMPersona(this._socios, "accion");
             this.dgvSocios.DataMember = "accion";
@@ -195,7 +234,20 @@ namespace ATPCenterGym
                         this.txtDpto.Text = this._socio.Tables["Socio"].Rows[0][11].ToString();
                         //this.cbEspecialidad.Text = this._socio.Tables["Socio"].Rows[0][12].ToString();
                         this.cbPuntos.Text = this._socio.Tables["Socio"].Rows[0][13].ToString();
-                        // this.pbxFoto.ImageLocation = this._socio.Tables["Socio"].Rows[0][2].ToString();
+                        // this.pbxFoto.ImageLocation = this._socio.Tables["Socio"].Rows[0][14].ToString();
+                        this.cbAptoMedico.Text = this._socio.Tables["Socio"].Rows[0][15].ToString();
+
+                        if ((this.cbAptoMedico.Text.Length <= 0)||(this.cbAptoMedico.Text=="NO"))
+                        {
+                            this.cbAptoMedico.Text = "NO";
+                            this.txtFechaIni.Text = "";
+                            this.txtFechaFin.Text = "";
+                        }
+                        else
+                        {
+                            this.txtFechaIni.Text = DateTime.Parse(this._socio.Tables["Socio"].Rows[0][16].ToString()).ToString("dd/MM/yyyy");
+                            this.txtFechaFin.Text = DateTime.Parse(this._socio.Tables["Socio"].Rows[0][17].ToString()).ToString("dd/MM/yyyy");
+                        }
 
                         this.dgvCursos.DataSource = this._cursos.BuscarInscripcionesCursosSocios("0", this.txtDni.Text, "Inscripciones");
                         this.dgvCursos.DataMember = "Inscripciones";
@@ -223,6 +275,8 @@ namespace ATPCenterGym
                     this.btnNuevo.Enabled = true;
                     this.btnModificar.Enabled = true;
                     this.btnEliminar.Enabled = true;
+
+
                 }
             }
             catch (Exception err)
@@ -246,7 +300,12 @@ namespace ATPCenterGym
             this.dgvCursos.DataSource = this._cursos.BuscarInscripcionesCursosSocios("0", this.txtDni.Text, "Inscripciones");
             this.dgvCursos.DataMember = "Inscripciones";
 
-            if (this.dgvCursos.Rows.Count > 0) this.dgvCursos.Columns[0].Visible = false;
+            if (this.dgvCursos.Rows.Count > 0)
+            {//Si presenta inscripciones a cursos
+                this.dgvCursos.Columns[0].Visible = false;
+                this.dgvCursos.Columns[5].Visible = false;
+                this.dgvCursos.Columns[6].Visible = false;
+            }
         }
 
         private void btnModificarInsc_Click(object sender, EventArgs e)
@@ -326,6 +385,34 @@ namespace ATPCenterGym
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtFechaIni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                this.txtFechaFin.Text = DateTime.Parse(this.txtFechaIni.Text).AddMonths(12).ToString("dd/MM/yyyy");
+                this.cbPuntos.Focus();
+            }
+        }
+
+        private void cbAptoMedico_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                if (this.cbAptoMedico.Text == "SI")
+                {
+                    this.txtFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                    this.txtFechaFin.Text = DateTime.Parse(this.txtFechaIni.Text).AddMonths(12).ToString("dd/MM/yyyy");
+                    this.txtFechaIni.Focus();
+                }
+                else
+                {
+                    this.txtFechaIni.Text = "";
+                    this.txtFechaFin.Text = "";
+                    this.cbPuntos.Focus();
+                }
+            }
         }
     }
 }

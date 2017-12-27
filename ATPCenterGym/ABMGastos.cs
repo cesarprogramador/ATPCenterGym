@@ -41,10 +41,12 @@ namespace ATPCenterGym
             this.cbBusPuntos.DataSource = _puntos;
             this.cbBusPuntos.ValueMember = "idpunto";
             this.cbBusPuntos.DisplayMember = "nombrepunto";
+            this.cbBusPuntos.Text = "";
 
             this.cbPuntos.DataSource = _puntos;
             this.cbPuntos.ValueMember = "idpunto";
             this.cbPuntos.DisplayMember = "nombrepunto";
+            this.cbPuntos.Text = "";
 
             this._proveedores.idpersona = "0";
             this._proveedores.nombre = "";
@@ -54,10 +56,12 @@ namespace ATPCenterGym
             this.cbBusProveedor.DataSource = _proveedor;
             this.cbBusProveedor.ValueMember = "idpersona";
             this.cbBusProveedor.DisplayMember = "Nombre";
-
+            this.cbBusProveedor.Text = "";
+            
             this.cbProveedor.DataSource = _proveedor;
             this.cbProveedor.ValueMember = "idpersona";
             this.cbProveedor.DisplayMember = "Nombre";
+            this.cbProveedor.Text = "";
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

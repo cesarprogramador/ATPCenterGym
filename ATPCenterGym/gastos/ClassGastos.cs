@@ -33,7 +33,10 @@ namespace ATPCenterGym.gastos
 
         public DataSet BuscarGastos(ClassGastos _gasto, string _tabla)
         {  
-            sql = "CALL sp_buscadorgastos(" + _gasto.idgasto + ",'" + _gasto.fechainigasto + "','" + _gasto.fechafingasto + "','" + _gasto.nombreproveedor + "','" + _gasto.nombrepunto + "',0,100);";
+            if (_gasto.fechainigasto==null)
+                sql = "CALL sp_buscadorgastos(" + _gasto.idgasto + ",NULL,NULL,'" + _gasto.nombreproveedor + "','" + _gasto.nombrepunto + "',0,100);";
+            else
+                sql = "CALL sp_buscadorgastos(" + _gasto.idgasto + ",'" + _gasto.fechainigasto + "','" + _gasto.fechafingasto + "','" + _gasto.nombreproveedor + "','" + _gasto.nombrepunto + "',0,100);";
 
             return this.RealizarAccion(sql, _tabla);
         }

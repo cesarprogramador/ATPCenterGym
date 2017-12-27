@@ -656,7 +656,7 @@
             this.MinimizeBox = false;
             this.Name = "ABMProfesores";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ABM Profesores";
+            this.Text = "                                   ";
             this.Load += new System.EventHandler(this.ABMProfesores_Load);
             this.gbxDetalleCursos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).EndInit();

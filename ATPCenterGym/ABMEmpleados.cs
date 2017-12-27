@@ -148,6 +148,9 @@ namespace ATPCenterGym
             this._empleado.idempleadoaccion = 1; //Viene del login
             this._empleado.idpuntoaccion = 1; //Viene del login
             this._empleado.idespecialidad = "1";
+            this._empleado.aptomedico = "NO";
+            this._empleado.fechainicertificado = null;
+            this._empleado.fechafincertificado = null;
 
             this.dgvEmpleados.DataSource = this._empleado.ABMPersona(this._empleado, "accion");
             this.dgvEmpleados.DataMember = "accion";

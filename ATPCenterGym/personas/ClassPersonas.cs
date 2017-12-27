@@ -39,6 +39,9 @@ namespace ATPCenter.personas
         public string nombrepunto { get; set; }
         public string idespecialidad { get; set; }
         public string especialidad { get; set; }
+        public string aptomedico { get; set; }
+        public string fechainicertificado { get; set; }
+        public string fechafincertificado { get; set; }
 
         public string accion{get;set;}
         public string fechaaccion{get;set;}
@@ -76,8 +79,14 @@ namespace ATPCenter.personas
 
         public DataSet ABMPersona(ClassPersonas _empleado,string _tabla)
         {
-            sql = "CALL sp_abmpersona(" + _empleado.idpersona + ",'" + _empleado.apellido + "','" + _empleado.nombre + "','" + _empleado.fechanac + "','" + _empleado.dni + "','" + _empleado.cuil + "','" + _empleado.cel + "','" + _empleado.tel + "','" + _empleado.correo + "','" + _empleado.calle + "','" + _empleado.numero + "','" + _empleado.piso + "','" + _empleado.dpto + "','" + _empleado.punto + "','" + _empleado.tipopersona + "','" + _empleado.urlfoto + "','" + _empleado.apellidocotacto + "','" + _empleado.nombrecontacto + "','" + _empleado.celcontacto + "','" + _empleado.telcontacto + "','" + _empleado.emailcontacto + "','" + _empleado.cuit + "','" + _empleado.idespecialidad + "','" + _empleado.accion + "','" + _empleado.fechaaccion + "','" + _empleado.idempleadoaccion + "','" + _empleado.idpuntoaccion + "');";
-
+            if (_empleado.aptomedico == "SI")
+            {
+                sql = "CALL sp_abmpersona(" + _empleado.idpersona + ",'" + _empleado.apellido + "','" + _empleado.nombre + "','" + _empleado.fechanac + "','" + _empleado.dni + "','" + _empleado.cuil + "','" + _empleado.cel + "','" + _empleado.tel + "','" + _empleado.correo + "','" + _empleado.calle + "','" + _empleado.numero + "','" + _empleado.piso + "','" + _empleado.dpto + "','" + _empleado.punto + "','" + _empleado.tipopersona + "','" + _empleado.urlfoto + "','" + _empleado.apellidocotacto + "','" + _empleado.nombrecontacto + "','" + _empleado.celcontacto + "','" + _empleado.telcontacto + "','" + _empleado.emailcontacto + "','" + _empleado.cuit + "','" + _empleado.idespecialidad + "','" + _empleado.aptomedico + "','" + _empleado.fechainicertificado + "','" + _empleado.fechafincertificado + "','" + _empleado.accion + "','" + _empleado.fechaaccion + "','" + _empleado.idempleadoaccion + "','" + _empleado.idpuntoaccion + "');";
+            }
+            else
+            {
+                sql = "CALL sp_abmpersona(" + _empleado.idpersona + ",'" + _empleado.apellido + "','" + _empleado.nombre + "','" + _empleado.fechanac + "','" + _empleado.dni + "','" + _empleado.cuil + "','" + _empleado.cel + "','" + _empleado.tel + "','" + _empleado.correo + "','" + _empleado.calle + "','" + _empleado.numero + "','" + _empleado.piso + "','" + _empleado.dpto + "','" + _empleado.punto + "','" + _empleado.tipopersona + "','" + _empleado.urlfoto + "','" + _empleado.apellidocotacto + "','" + _empleado.nombrecontacto + "','" + _empleado.celcontacto + "','" + _empleado.telcontacto + "','" + _empleado.emailcontacto + "','" + _empleado.cuit + "','" + _empleado.idespecialidad + "','" + _empleado.aptomedico + "',NULL,NULL,'" + _empleado.accion + "','" + _empleado.fechaaccion + "','" + _empleado.idempleadoaccion + "','" + _empleado.idpuntoaccion + "');";
+            }
             return this.RealizarAccion(sql, _tabla);
         }
 
@@ -94,7 +103,7 @@ namespace ATPCenter.personas
 
         public DataTable BuscarPuntos(ClassPersonas _empleado)
         {
-            sql = "CALL sp_buscadorpuntos(" + _empleado.idpunto + ",'" + _empleado.nombrepunto + "',0,100);";
+            sql = "CALL sp_buscadorpuntos(" + _empleado.idpunto + ",'" + _empleado.nombrepunto + "','',0,100);";
 
             return this.RealizarAccion(sql);
         }

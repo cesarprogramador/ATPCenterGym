@@ -83,6 +83,9 @@ namespace ATPCenterGym
             this._proveedores.emailcontacto = this.txtEmailContacto.Text;
             this._proveedores.tipopersona = "Proveedor";
             this._proveedores.idespecialidad = "1";
+            this._proveedores.aptomedico = "NO";
+            this._proveedores.fechainicertificado = null;
+            this._proveedores.fechafincertificado = null;
             
             this._proveedores.accion = this.bandera;
             this._proveedores.fechaaccion = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
