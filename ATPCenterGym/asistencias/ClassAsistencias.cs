@@ -16,7 +16,7 @@ namespace ATPCenterGym.asistencias
         public string idpersona { get; set; }
         public string ingreso { get; set; }
         public string salida { get; set; }
-        public string idpunto { get; set; }
+        public string punto { get; set; }
        
         public string accion { get; set; }
         public string fechaaccion { get; set; }
@@ -24,9 +24,9 @@ namespace ATPCenterGym.asistencias
         public int idpuntoaccion { get; set; }
         public string sql { get; set; }
         
-        public DataSet BuscarPersonaAsistencia(ClassPersonas _empleado, string _tabla)
+        public DataSet BuscarPersonaAsistencia(string _dato, string _tabla)
         {
-            sql = "CALL sp_buscadorsocios(" + _empleado.idpersona + ",'" + _empleado.apellido + "','" + _empleado.nombre + "','" + _empleado.dni + "','" + _empleado.punto + "','" + _empleado.tipopersona + "',0,100);";
+            sql = "CALL sp_buscadorpersonas('" + _dato + "');";
 
             return this.RealizarAccion(sql, _tabla);
         }

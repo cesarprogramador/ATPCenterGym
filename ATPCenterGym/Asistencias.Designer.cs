@@ -47,7 +47,7 @@
             this.lblFechaHora.AutoSize = true;
             this.lblFechaHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaHora.ForeColor = System.Drawing.Color.White;
-            this.lblFechaHora.Location = new System.Drawing.Point(283, 24);
+            this.lblFechaHora.Location = new System.Drawing.Point(268, 24);
             this.lblFechaHora.Name = "lblFechaHora";
             this.lblFechaHora.Size = new System.Drawing.Size(275, 31);
             this.lblFechaHora.TabIndex = 1;
@@ -56,9 +56,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(284, 74);
+            this.label2.Location = new System.Drawing.Point(269, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 16);
             this.label2.TabIndex = 2;
@@ -69,7 +69,7 @@
             this.lblApeNomb.AutoSize = true;
             this.lblApeNomb.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblApeNomb.ForeColor = System.Drawing.Color.White;
-            this.lblApeNomb.Location = new System.Drawing.Point(284, 97);
+            this.lblApeNomb.Location = new System.Drawing.Point(269, 90);
             this.lblApeNomb.Name = "lblApeNomb";
             this.lblApeNomb.Size = new System.Drawing.Size(30, 25);
             this.lblApeNomb.TabIndex = 3;
@@ -80,7 +80,7 @@
             this.lblTipoPerPunto.AutoSize = true;
             this.lblTipoPerPunto.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTipoPerPunto.ForeColor = System.Drawing.Color.White;
-            this.lblTipoPerPunto.Location = new System.Drawing.Point(284, 131);
+            this.lblTipoPerPunto.Location = new System.Drawing.Point(269, 124);
             this.lblTipoPerPunto.Name = "lblTipoPerPunto";
             this.lblTipoPerPunto.Size = new System.Drawing.Size(30, 25);
             this.lblTipoPerPunto.TabIndex = 4;
@@ -89,9 +89,9 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(284, 197);
+            this.label5.Location = new System.Drawing.Point(269, 195);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(153, 16);
             this.label5.TabIndex = 5;
@@ -102,7 +102,7 @@
             this.lblFechaHoraAcceso.AutoSize = true;
             this.lblFechaHoraAcceso.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaHoraAcceso.ForeColor = System.Drawing.Color.White;
-            this.lblFechaHoraAcceso.Location = new System.Drawing.Point(408, 221);
+            this.lblFechaHoraAcceso.Location = new System.Drawing.Point(393, 219);
             this.lblFechaHoraAcceso.Name = "lblFechaHoraAcceso";
             this.lblFechaHoraAcceso.Size = new System.Drawing.Size(30, 25);
             this.lblFechaHoraAcceso.TabIndex = 6;
@@ -130,7 +130,7 @@
             this.pbxFotoSocio.Image = global::ATPCenterGym.Properties.Resources.black;
             this.pbxFotoSocio.Location = new System.Drawing.Point(25, 17);
             this.pbxFotoSocio.Name = "pbxFotoSocio";
-            this.pbxFotoSocio.Size = new System.Drawing.Size(211, 226);
+            this.pbxFotoSocio.Size = new System.Drawing.Size(202, 226);
             this.pbxFotoSocio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxFotoSocio.TabIndex = 0;
             this.pbxFotoSocio.TabStop = false;
@@ -141,7 +141,7 @@
             this.lblAptoMedico.AutoSize = true;
             this.lblAptoMedico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAptoMedico.ForeColor = System.Drawing.Color.White;
-            this.lblAptoMedico.Location = new System.Drawing.Point(284, 165);
+            this.lblAptoMedico.Location = new System.Drawing.Point(269, 158);
             this.lblAptoMedico.Name = "lblAptoMedico";
             this.lblAptoMedico.Size = new System.Drawing.Size(30, 25);
             this.lblAptoMedico.TabIndex = 29;

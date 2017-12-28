@@ -14,10 +14,10 @@ namespace ATPCenterGym
 {
     public partial class Asistencias : Form
     {
-        ClassPersonas _persona;
         ClassAsistencias _asistencia;
         DataSet _emp;
-      
+        public string _punto = "";
+ 
         public Asistencias()
         {
             InitializeComponent();
@@ -51,29 +51,27 @@ namespace ATPCenterGym
             //Busco persona en base de datos
             if (numdni.Length > 0)
             {
-                this._persona = new ClassPersonas();
-
-                this._persona.idpersona = "0";
-                this._persona.apellido = "";
-                this._persona.nombre = "";
-                this._persona.dni = numdni;
-                this._persona.punto = "";
-                this._persona.tipopersona = "Socio";
+                this._asistencia = new ClassAsistencias();
 
                 this._emp = new DataSet();
 
-                this._emp = this._asistencia.BuscarPersonaAsistencia(this._persona, "Login");
+                this._emp = this._asistencia.BuscarPersonaAsistencia(numdni, "Login");
 
                 if (this._emp.Tables["Login"].Rows.Count > 0)
                 {
                     //Informo de la persona ingresada mostrando su foto, fecha y hora de ingreso, apellido y nombre por un tiempo de 1 minuto
-                    this._persona.idpersona = this._emp.Tables["Login"].Rows[0][0].ToString();
+                    this._asistencia.idpersona = this._emp.Tables["Login"].Rows[0][0].ToString();
+                    this._asistencia.punto = this._punto;
+                    
                     this.lblApeNomb.Text = this._emp.Tables["Login"].Rows[0][1].ToString();
-                    this.lblTipoPerPunto.Text = this._emp.Tables["Login"].Rows[0][2].ToString() + " - " + this._emp.Tables["Login"].Rows[0][3].ToString();
 
-                    this.lblAptoMedico.Text = VencidoActoMedico(this._emp.Tables["Login"].Rows[0][4].ToString());
+                    this.lblTipoPerPunto.Text = this._emp.Tables["Login"].Rows[0][2].ToString() + " - " + this._punto;
+
+                    this.lblAptoMedico.Text = VencidoActoMedico(this._emp.Tables["Login"].Rows[0][3].ToString());
 
                     this.lblFechaHoraAcceso.Text = this.lblFechaHora.Text;
+
+                    this._asistencia.ingreso = this.lblFechaHoraAcceso.Text;
                     //Registro asistencia en base de datos
 
 
@@ -90,20 +88,27 @@ namespace ATPCenterGym
         {
             DateTime fecha;
 
-            if (fechavence.Length > 0)
+            try
             {
-                fecha = DateTime.Parse(fechavence);
-
-                if (fecha <= DateTime.Now)
+                if (fechavence.Length > 0)
                 {
-                    return "Vencio su aptitud medica";
+                    fecha = DateTime.Parse(fechavence);
+
+                    if (fecha <= DateTime.Now)
+                    {
+                        return "Vencio su aptitud medica";
+                    }
+                    else
+                    {
+                        return "Aptitud medica al día";
+                    }
                 }
                 else
                 {
-                    return "Aptitud medica al día";
+                    return "No presento nunca aptitud medica.";
                 }
             }
-            else
+            catch (Exception err)
             {
                 return "No presento nunca aptitud medica.";
             }
