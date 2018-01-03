@@ -17,6 +17,8 @@ namespace ATPCenterGym
         ClassAsistencias _asistencia;
         DataSet _emp;
         public string _punto = "";
+        private bool bandera = false;
+        private int contado = 0;
  
         public Asistencias()
         {
@@ -32,6 +34,21 @@ namespace ATPCenterGym
         private void reloj_Tick(object sender, EventArgs e)
         {
             this.lblFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            
+            if ((this.contado > 30)&&(this.bandera==true))
+            {
+                this.bandera = false;
+                this.contado = 0;
+                this.lblApeNomb.Text = "...";
+                this.lblTipoPerPunto.Text = "...";
+                this.lblAptoMedico.Text = "...";
+                this.lblFechaHoraAcceso.Text = "...";
+            //    this.pbxFotoSocio.Select;
+            }
+            else
+            {
+                this.contado++;
+            }
         }
 
         private void lblClose_Click(object sender, EventArgs e)
@@ -59,7 +76,13 @@ namespace ATPCenterGym
 
                 if (this._emp.Tables["Login"].Rows.Count > 0)
                 {
+                    //Se utiliza para el tiempo de duración del logín
+                    this.bandera = true;
+                    this.contado = 0;
+
                     //Informo de la persona ingresada mostrando su foto, fecha y hora de ingreso, apellido y nombre por un tiempo de 1 minuto
+                    this._asistencia.idasistencia = "0";
+                   
                     this._asistencia.idpersona = this._emp.Tables["Login"].Rows[0][0].ToString();
                     this._asistencia.punto = this._punto;
                     
@@ -71,11 +94,17 @@ namespace ATPCenterGym
 
                     this.lblFechaHoraAcceso.Text = this.lblFechaHora.Text;
 
-                    this._asistencia.ingreso = this.lblFechaHoraAcceso.Text;
+                    this._asistencia.ingreso = DateTime.Parse(this.lblFechaHoraAcceso.Text).ToString("yyyy/MM/dd hh:mm:ss");
+
+                    this._asistencia.salida = DateTime.Parse(this.lblFechaHoraAcceso.Text).ToString("yyyy/MM/dd hh:mm:ss");
+
+                    this._asistencia.accion = "I";
+                    this._asistencia.fechaaccion = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+                    this._asistencia.idempleadoaccion = 1; //Viene del login
+                    this._asistencia.idpuntoaccion = 1; //Viene del login
+                    
                     //Registro asistencia en base de datos
-
-
-                    //Reestablecer pantalla para siguiente validación
+                    this._asistencia.ABMAsistencia(this._asistencia, "ingreso");                    
                 }
                 else
                 {
@@ -113,51 +142,5 @@ namespace ATPCenterGym
                 return "No presento nunca aptitud medica.";
             }
         }
-
-        private void AltaDeAsistencia()
-        {/*
-            this._login.idpersona=this.idpersona;
-            this._login.accion = "N";
-            this._login.fechaaccion = this.lblFechaHoraAcceso.Text;
-            this._login.idempleadoaccion = 1; //Viene del login
-            this._login.idpuntoaccion = 1; //Viene del login
-
-            this.dgvSocios.DataSource = this._login.ABMPersona(this._socios, "accion");
-            this.dgvSocios.DataMember = "accion";
-
-            if (this.dgvSocios.Rows.Count > 0)
-            {
-                this.dgvSocios.Columns[0].Visible = false;
-                MessageBox.Show("Acción realizada con exito. Indicar ahora a los cursos en los que se inscribira!!!", "Atención!!!");
-
-                this.gbxDetalleCursos.Enabled = true;
-
-                this.btnModificarInsc.Enabled = false;
-                this.btnEliminarInsc.Enabled = false;
-
-                this.btnCancelar_Click(sender, e);
-            }
-            else
-            {
-                if (this.dgvSocios.Rows.Count == 0 && (this.bandera == "B"))
-                {
-                    this.dgvSocios.Columns[0].Visible = false;
-                    MessageBox.Show("Acción realizada con exito!!!", "Atención!!!");
-
-                    this.gbxDetalleCursos.Enabled = true;
-
-                    this.btnModificarInsc.Enabled = false;
-                    this.btnEliminarInsc.Enabled = false;
-
-                    this.btnCancelar_Click(sender, e);
-                }
-                else
-                {
-
-                    MessageBox.Show("Error en la ejecución de la acción en curso. Controle datos!!!", "Error!!!");
-                }
-            }
-          */
-        }
-    }
+  }
 }

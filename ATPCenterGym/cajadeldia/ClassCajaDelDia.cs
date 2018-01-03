@@ -38,7 +38,7 @@ namespace ATPCenter.cajadeldia
 
         public DataSet BuscarCajaDelDia(ClassCajaDelDia _caja, string _tabla)
         {
-            sql = "CALL sp_buscadorcajadeldia('" + _caja.tipooperacion + "','" + DateTime.Parse(_caja.fechainicio).ToString("yyyy/MM/dd") + " 00:00:00','" + DateTime.Parse(_caja.fechafin).ToString("yyyy/MM/dd") + " 00:00:00','" + _caja.apellidos + "','" + _caja.nombres + "','" + _caja.detallemovimiento + "','" + _caja.tipopersona + "','" + _caja.punto + "','" + _caja.nombreclase + "','" + _caja.tipoclase + "',0,100);";
+            sql = "CALL sp_buscadorcajadeldia('" + _caja.tipooperacion + "','" + DateTime.Parse(_caja.fechainicio).ToString("yyyy/MM/dd") + " 01:00:00','" + DateTime.Parse(_caja.fechafin).ToString("yyyy/MM/dd") + " 23:59:00','" + _caja.apellidos + "','" + _caja.nombres + "','" + _caja.detallemovimiento + "','" + _caja.tipopersona + "','" + _caja.punto + "','" + _caja.nombreclase + "','" + _caja.tipoclase + "','" + DateTime.Parse(_caja.fechafin).ToString("yyyy/MM/dd") + "',0,100);";
             
             return this.RealizarAccion(sql, _tabla);
         }

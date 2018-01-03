@@ -53,9 +53,9 @@ namespace ATPCenterGym.asistencias
             return _resp;
         }
 
-        public DataSet ABMAsistencia(ClassPersonas _empleado, string _tabla)
+        public DataSet ABMAsistencia(ClassAsistencias _asistencia, string _tabla)
         {
-            sql = "CALL sp_abmasistencia(" + _empleado.idpersona + ",'" + _empleado.apellido + "','" + _empleado.nombre + "','" + _empleado.fechanac + "','" + _empleado.dni + "','" + _empleado.cuil + "','" + _empleado.cel + "','" + _empleado.tel + "','" + _empleado.correo + "','" + _empleado.calle + "','" + _empleado.numero + "','" + _empleado.piso + "','" + _empleado.dpto + "','" + _empleado.punto + "','" + _empleado.tipopersona + "','" + _empleado.urlfoto + "','" + _empleado.apellidocotacto + "','" + _empleado.nombrecontacto + "','" + _empleado.celcontacto + "','" + _empleado.telcontacto + "','" + _empleado.emailcontacto + "','" + _empleado.cuit + "','" + _empleado.idespecialidad + "','" + _empleado.aptomedico + "','" + _empleado.fechainicertificado + "','" + _empleado.fechafincertificado + "','" + _empleado.accion + "','" + _empleado.fechaaccion + "','" + _empleado.idempleadoaccion + "','" + _empleado.idpuntoaccion + "');";
+            sql = "CALL sp_abmasistencia(" + _asistencia.idasistencia + "," + _asistencia.idpersona + ",'" + _asistencia.ingreso + "','" + _asistencia.salida + "','" + _asistencia.punto + "','" + _asistencia.accion + "','" + _asistencia.fechaaccion + "','" + _asistencia.idempleadoaccion + "','" + _asistencia.idpuntoaccion + "');";
 
             return this.RealizarAccion(sql, _tabla);
         }

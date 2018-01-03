@@ -45,9 +45,8 @@
             this.aBmGastosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBMPuntosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBMTipoDeClasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asistenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnBusNombreClase = new System.Windows.Forms.Button();
-            this.btnBusTipoClase = new System.Windows.Forms.Button();
             this.btnVistaPrevia = new System.Windows.Forms.Button();
             this.btnCajaDia = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -78,8 +77,12 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtTotalCaja = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlApto = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.pnlCuota = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.pnlAmbos = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleCaja)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -104,10 +107,11 @@
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivosToolStripMenuItem,
-            this.aBMToolStripMenuItem});
+            this.aBMToolStripMenuItem,
+            this.asistenciasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(6, 8);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(113, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(190, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -219,6 +223,14 @@
             this.aBMTipoDeClasesToolStripMenuItem.Text = "ABM Tipo de clases";
             this.aBMTipoDeClasesToolStripMenuItem.Click += new System.EventHandler(this.aBMTipoDeClasesToolStripMenuItem_Click);
             // 
+            // asistenciasToolStripMenuItem
+            // 
+            this.asistenciasToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.asistenciasToolStripMenuItem.Name = "asistenciasToolStripMenuItem";
+            this.asistenciasToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.asistenciasToolStripMenuItem.Text = "Asistencias";
+            this.asistenciasToolStripMenuItem.Click += new System.EventHandler(this.asistenciasToolStripMenuItem_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -228,28 +240,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
-            // 
-            // btnBusNombreClase
-            // 
-            this.btnBusNombreClase.ForeColor = System.Drawing.Color.Black;
-            this.btnBusNombreClase.Location = new System.Drawing.Point(494, 120);
-            this.btnBusNombreClase.Name = "btnBusNombreClase";
-            this.btnBusNombreClase.Size = new System.Drawing.Size(30, 23);
-            this.btnBusNombreClase.TabIndex = 55;
-            this.btnBusNombreClase.Text = "...";
-            this.btnBusNombreClase.UseVisualStyleBackColor = true;
-            this.btnBusNombreClase.Click += new System.EventHandler(this.btnBusNombreClase_Click);
-            // 
-            // btnBusTipoClase
-            // 
-            this.btnBusTipoClase.ForeColor = System.Drawing.Color.Black;
-            this.btnBusTipoClase.Location = new System.Drawing.Point(494, 93);
-            this.btnBusTipoClase.Name = "btnBusTipoClase";
-            this.btnBusTipoClase.Size = new System.Drawing.Size(30, 23);
-            this.btnBusTipoClase.TabIndex = 54;
-            this.btnBusTipoClase.Text = "...";
-            this.btnBusTipoClase.UseVisualStyleBackColor = true;
-            this.btnBusTipoClase.Click += new System.EventHandler(this.btnBusTipoClase_Click);
             // 
             // btnVistaPrevia
             // 
@@ -338,6 +328,7 @@
             this.cbBusTipoClase.Name = "cbBusTipoClase";
             this.cbBusTipoClase.Size = new System.Drawing.Size(131, 21);
             this.cbBusTipoClase.TabIndex = 45;
+            this.cbBusTipoClase.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbBusTipoClase_KeyPress);
             // 
             // cbBusPuntos
             // 
@@ -354,7 +345,8 @@
             "Caja del día",
             "Ingresos",
             "Egresos",
-            "Cuotas Impagas"});
+            "Cuotas Impagas",
+            "Asistencias"});
             this.cbBusTipoOperaciones.Location = new System.Drawing.Point(118, 64);
             this.cbBusTipoOperaciones.Name = "cbBusTipoOperaciones";
             this.cbBusTipoOperaciones.Size = new System.Drawing.Size(131, 21);
@@ -552,33 +544,75 @@
             this.label13.TabIndex = 62;
             this.label13.Text = "Monto Total en Caja $:";
             // 
-            // panel1
+            // pnlApto
             // 
-            this.panel1.BackColor = System.Drawing.Color.Orange;
-            this.panel1.Location = new System.Drawing.Point(17, 623);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(25, 27);
-            this.panel1.TabIndex = 64;
+            this.pnlApto.BackColor = System.Drawing.Color.Orange;
+            this.pnlApto.Location = new System.Drawing.Point(12, 650);
+            this.pnlApto.Name = "pnlApto";
+            this.pnlApto.Size = new System.Drawing.Size(25, 27);
+            this.pnlApto.TabIndex = 64;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(45, 629);
+            this.label14.Location = new System.Drawing.Point(40, 656);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(234, 16);
             this.label14.TabIndex = 65;
             this.label14.Text = "Apto médico vencido o no lo presento";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.White;
+            this.label15.Location = new System.Drawing.Point(40, 691);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(161, 16);
+            this.label15.TabIndex = 67;
+            this.label15.Text = "Presenta cuotas impagas";
+            // 
+            // pnlCuota
+            // 
+            this.pnlCuota.BackColor = System.Drawing.Color.Gold;
+            this.pnlCuota.Location = new System.Drawing.Point(12, 683);
+            this.pnlCuota.Name = "pnlCuota";
+            this.pnlCuota.Size = new System.Drawing.Size(25, 27);
+            this.pnlCuota.TabIndex = 66;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(40, 623);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(284, 16);
+            this.label16.TabIndex = 69;
+            this.label16.Text = "Presenta cuotas impagas y debe apto médico";
+            // 
+            // pnlAmbos
+            // 
+            this.pnlAmbos.BackColor = System.Drawing.Color.Red;
+            this.pnlAmbos.Location = new System.Drawing.Point(12, 617);
+            this.pnlAmbos.Name = "pnlAmbos";
+            this.pnlAmbos.Size = new System.Drawing.Size(25, 27);
+            this.pnlAmbos.TabIndex = 68;
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(946, 713);
+            this.ClientSize = new System.Drawing.Size(946, 722);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.pnlAmbos);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.pnlCuota);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlApto);
             this.Controls.Add(this.txtTotalCaja);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.txtTotalEgreso);
@@ -586,8 +620,6 @@
             this.Controls.Add(this.txtTotalIngreso);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.lblTituloForm);
-            this.Controls.Add(this.btnBusNombreClase);
-            this.Controls.Add(this.btnBusTipoClase);
             this.Controls.Add(this.btnVistaPrevia);
             this.Controls.Add(this.btnCajaDia);
             this.Controls.Add(this.btnBuscar);
@@ -644,8 +676,6 @@
         private System.Windows.Forms.ToolStripMenuItem cerrarSessionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirProgramaToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnBusNombreClase;
-        private System.Windows.Forms.Button btnBusTipoClase;
         private System.Windows.Forms.Button btnVistaPrevia;
         private System.Windows.Forms.Button btnCajaDia;
         private System.Windows.Forms.Button btnBuscar;
@@ -678,7 +708,12 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ToolStripMenuItem aBMPuntosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aBMTipoDeClasesToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlApto;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ToolStripMenuItem asistenciasToolStripMenuItem;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Panel pnlCuota;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Panel pnlAmbos;
     }
 }

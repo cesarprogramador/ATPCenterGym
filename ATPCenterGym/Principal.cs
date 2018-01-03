@@ -82,41 +82,13 @@ namespace ATPCenterGym
             this._cursos = new ClassCursos();
             this._cursos.idpunto = "0";
             this._cursos.tipodeclase = "";
-            /*
-            this.cbBusTipoClase.DataSource = this._cursos.BuscarTiposDeClases(this._cursos);
-            this.cbBusTipoClase.ValueMember = "idtipodeclase";
-            this.cbBusTipoClase.DisplayMember = "tipodeclase";
-            this.cbBusTipoClase.Text = "";
-            */
-            this._clases = new ClassTiposDeClases();
 
-            this._clases.idclase = "0";
-            this._clases.idtipodeclase = "0";
-            this._clases.nombreclase = "";
-
-            DataTable _todasclases = this._clases.BuscarTiposDeClases(this._clases);
-
-            this.cbBusTipoClase.DataSource = _todasclases;
-            this.cbBusTipoClase.ValueMember = "idtipodeclase";
-            this.cbBusTipoClase.DisplayMember = "tipodeclase";
-            this.cbBusTipoClase.SelectedValue = 1;
-
+            this.PoblarComboTipoDeClases();
 
             this.cbBusNombreClase.Enabled = false;
         }
 
-        private void btnBusTipoClase_Click(object sender, EventArgs e)
-        {
-            this._cursos.idpunto = this.cbBusPuntos.SelectedValue.ToString();
-            this._cursos.tipodeclase = "";
-            this.cbBusTipoClase.Text = "";
-            this.cbBusTipoClase.DataSource = this._cursos.BuscarTiposDeClases(this._cursos);
-            this.cbBusTipoClase.ValueMember = "idtipodeclase";
-            this.cbBusTipoClase.DisplayMember = "tipodeclase";
-            this.cbBusTipoClase.Enabled = true;
-        }
-
-        private void btnBusNombreClase_Click(object sender, EventArgs e)
+        private void ObtenerTiposDeClases()
         {
             try
             {
@@ -125,7 +97,7 @@ namespace ATPCenterGym
                 this._cursos.idclase = "0";
                 this._cursos.idtipodeclase = this.cbBusTipoClase.SelectedValue.ToString();
                 this._cursos.tipodeclase = "";
-                this.cbBusNombreClase.Text = "";
+
                 this.cbBusNombreClase.DataSource = this._cursos.BuscarNombresDeClases(this._cursos);
                 this.cbBusNombreClase.ValueMember = "idclase";
                 this.cbBusNombreClase.DisplayMember = "nombreclase";
@@ -231,6 +203,23 @@ namespace ATPCenterGym
                     this._caja.nombreclase = this.cbBusNombreClase.Text;
                     this._caja.tipoclase = this.cbBusTipoClase.Text;
                     break;
+                case "Asistencias":
+                    if ((this.cbBusTipoPersona.Text == "Todos") || (this.cbBusTipoPersona.Text.Length<=0))
+                    {
+                        this._caja.tipopersona = "";
+                    }
+                    else 
+                    {
+                        this._caja.tipopersona = this.cbBusTipoPersona.Text;
+                    }
+
+                    this._caja.apellidos = this.txtBusApellido.Text;
+                    this._caja.nombres = this.txtBusNombre.Text;
+                    this._caja.detallemovimiento = this.txtBusDetalleMovimiento.Text;
+                    this._caja.punto = this.cbBusPuntos.Text;
+                    this._caja.tipoclase = this.cbBusTipoClase.Text;
+                    this._caja.nombreclase = this.cbBusNombreClase.Text;
+                    break;
             }
 
             this.dgvDetalleCaja.DataSource = this._caja.BuscarCajaDelDia(this._caja, "CajaDia");
@@ -246,9 +235,12 @@ namespace ATPCenterGym
                 }
                 else
                 {
-                    if ((this.cbBusTipoOperaciones.Text == "Ingresos") ||(this.cbBusTipoOperaciones.Text == "Caja del día"))
+                    if ((this.cbBusTipoOperaciones.Text == "Ingresos") || (this.cbBusTipoOperaciones.Text == "Caja del día") || (this.cbBusTipoOperaciones.Text == "Asistencias"))
                     {
                         this.dgvDetalleCaja.Columns[0].Visible = false;
+                        
+                        if (this.cbBusTipoOperaciones.Text == "Asistencias") this.dgvDetalleCaja.Columns[6].Visible = false;
+                        
                         this.dgvDetalleCaja.Columns[8].Visible = false;
                         this.dgvDetalleCaja.Columns[9].Visible = false;
                         this.dgvDetalleCaja.Columns[10].Visible = false;
@@ -261,9 +253,22 @@ namespace ATPCenterGym
                     }
                 }
 
-                this.ObtenerTotales();
+                if ((this.cbBusTipoOperaciones.Text != "Asistencias"))
+                {
+                    this.ObtenerTotales();
+                }
+                else
+                {
+                    this.txtTotalCaja.Text = "0.00";
+                    this.txtTotalEgreso.Text = "0.00";
+                    this.txtTotalIngreso.Text = "0.00";
+                }
 
-                if (this.cbBusTipoOperaciones.Text != "Egresos") this.VencidoActoMedico();
+                if ((this.cbBusTipoOperaciones.Text == "Cuotas Impagas") || (this.cbBusTipoOperaciones.Text == "Asistencias"))
+                {
+                    this.VencidoActoMedicoYCuotasImpagas();
+                }
+           
             }
             else 
             {
@@ -271,24 +276,49 @@ namespace ATPCenterGym
             }
         }
 
-        private void VencidoActoMedico()
+        private void VencidoActoMedicoYCuotasImpagas()
         {
             DateTime fecha;
+            string deuda = "";
 
             for (int i = 0; i < this.dgvDetalleCaja.Rows.Count; i++)
             {
-                if (this.dgvDetalleCaja[10, i].Value.ToString().Length > 0)
+                try
                 {
+                    deuda = this.dgvDetalleCaja[7, i].Value.ToString();
                     fecha = DateTime.Parse(this.dgvDetalleCaja[10, i].Value.ToString());
 
-                    if (fecha <= DateTime.Now)
+                    //Debé apto médico y cuota
+                    if ((fecha <= DateTime.Now) && (deuda != "0"))
                     {
-                        this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = Color.Orange;
+                        this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = this.pnlAmbos.BackColor;
+                    }
+                    else
+                    {
+                        //Debé apto médico sin cuota
+                        if ((fecha <= DateTime.Now) && (deuda == "0"))
+                        {
+                            this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = this.pnlApto.BackColor;
+                        }
+                        else
+                        {
+                            //Debé cuota y sin apto médico
+                            this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = this.pnlCuota.BackColor;
+                        }
                     }
                 }
-                else 
+                catch (Exception err)
                 {
-                    this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = Color.Orange;
+                    if (deuda != "0")
+                    {
+                        //Debé apto médico y cuota
+                        this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = this.pnlAmbos.BackColor;
+                    }
+                    else
+                    {
+                        //Debé apto médico sin cuota
+                        this.dgvDetalleCaja.Rows[i].DefaultCellStyle.BackColor = this.pnlApto.BackColor;
+                    }
                 }
             }
         }
@@ -348,12 +378,12 @@ namespace ATPCenterGym
                    
                     this.cbBusTipoClase.Text="";
                     this.cbBusTipoClase.Enabled = true;
-                    this.btnBusTipoClase.Enabled = true;
+                
+                    this.PoblarComboTipoDeClases();
 
                     this.cbBusNombreClase.Text = "";
                     this.cbBusNombreClase.DataSource = null;
                     this.cbBusNombreClase.Enabled = true;
-                    this.btnBusNombreClase.Enabled = true;
                     break;
                 case "Ingresos":
                     this.txtBusFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -412,9 +442,7 @@ namespace ATPCenterGym
                     
                     this.cbBusTipoClase.Text = "";
                     this.cbBusTipoClase.Enabled = false;
-                    this.btnBusTipoClase.Enabled = false;
 
-                    this.btnBusNombreClase.Enabled = false;
                     this.cbBusNombreClase.DataSource = null;
                     this.cbBusNombreClase.Enabled = false;
                     break;
@@ -444,15 +472,72 @@ namespace ATPCenterGym
 
                     this.cbBusTipoClase.Text = "";
                     this.cbBusTipoClase.Enabled = true;
-                    this.btnBusTipoClase.Enabled = true;
+
+                    this.PoblarComboTipoDeClases();
 
                     this.cbBusNombreClase.Text = "";
                     this.cbBusNombreClase.DataSource = null;
                     this.cbBusNombreClase.Enabled = true;
-                    this.btnBusNombreClase.Enabled = true;
                     break;
+                case "Asistencias":
+                    this.txtBusFechaIni.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                    // this.txtBusFechaIni.Enabled = false;
+                    this.txtBusFechaFin.Text = this.txtBusFechaIni.Text;
+                    // this.txtBusFechaFin.Enabled = false;
+
+                    this.txtBusApellido.Text = "";
+                    this.txtBusApellido.Enabled = true;
+
+                    this.txtBusNombre.Text = "";
+                    this.txtBusNombre.Enabled = true;
+
+                    this.cbBusTipoPersona.Text = "Todos";
+                    this.cbBusTipoPersona.Items.Add("Todos");
+                    this.cbBusTipoPersona.Items.Add("Administrador");
+                    this.cbBusTipoPersona.Items.Add("Empleado");
+                    this.cbBusTipoPersona.Items.Add("Proveedor");
+                    this.cbBusTipoPersona.Items.Add("Profesor");
+                    this.cbBusTipoPersona.Items.Add("Socio");
+                    this.cbBusTipoPersona.Enabled = true;
+
+                    this.cbBusPuntos.Text = "";
+                    this.cbBusPuntos.Enabled = true;
+                    this._cursos.idpunto = "0";
+
+                    this.cbBusTipoClase.Text = "";
+                    this.cbBusTipoClase.Enabled = false;
+
+                    this.cbBusNombreClase.Text = "";
+                    this.cbBusNombreClase.DataSource = null;
+                    this.cbBusNombreClase.Enabled = false;
+                   
+                    this.txtBusDetalleMovimiento.Text = "";
+                    this.txtBusDetalleMovimiento.Enabled = false;
+                   break;
             }
         }
+
+        private void PoblarComboTipoDeClases()
+        {
+            this._clases = new ClassTiposDeClases();
+
+            this._clases.idclase = "0";
+            this._clases.idtipodeclase = "1";
+            this._clases.nombreclase = "";
+
+            DataTable _todasclases = this._clases.BuscarTiposDeClases(this._clases);
+
+            //Agrupar o borrar las filas repetidas de la lista que se recupera de la consulta
+            _todasclases = this._clases.EliminarFilasDuplicadas(_todasclases, "tipodeclase");
+
+            //Muestra datos en el combo
+            this.cbBusTipoClase.DataSource = _todasclases;
+            this.cbBusTipoClase.ValueMember = "idtipodeclase";
+            this.cbBusTipoClase.DisplayMember = "tipodeclase";
+            this.cbBusTipoClase.Text = "";
+
+        }
+
 
         private void aBMProveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -651,6 +736,20 @@ namespace ATPCenterGym
         {
             ABMClases fromclase = new ABMClases();
             fromclase.Show();
+        }
+
+        private void asistenciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Asistencias formasistencia = new Asistencias();
+            
+            formasistencia._punto = this._loginper.punto;
+
+            formasistencia.Show();
+        }
+
+        private void cbBusTipoClase_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13) this.ObtenerTiposDeClases();
         }
     }
 }

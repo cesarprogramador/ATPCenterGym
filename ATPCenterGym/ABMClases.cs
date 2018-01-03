@@ -47,7 +47,11 @@ namespace ATPCenterGym
             this.dgvClases.DataSource = this._clases.BuscarTiposDeClases(this._clases, "Clases");
             this.dgvClases.DataMember = "Clases";
 
-            if (this.dgvClases.Rows.Count > 0) this.dgvClases.Columns[0].Visible = false; 
+            if (this.dgvClases.Rows.Count > 0)
+            {
+                this.dgvClases.Columns[0].Visible = false;
+                this.dgvClases.Columns[2].Visible = false;
+            }
         }
 
         private void dgvClases_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -172,7 +176,9 @@ namespace ATPCenterGym
 
             if (this.dgvClases.Rows.Count > 0)
             {
-                this.dgvClases.Columns[0].Visible = false;
+                  this.dgvClases.Columns[0].Visible = false;
+                    this.dgvClases.Columns[2].Visible = false;
+               
                 MessageBox.Show("Acción realizada con exito", "Atención!!!");
 
                 this.btnCancelar_Click(sender, e);
